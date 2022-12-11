@@ -1,0 +1,26 @@
+.sidebar-svg {
+    margin-right: 20px;
+    margin-bottom: 4px;
+}
+
+.sidebar-list-svg {
+    font-size: 14px;
+    margin-bottom: 3px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.sidebar-title {
+    font-size: 20px;
+}
+
+.sidebar-list-title {
+    font-size: 14px;
+}
+
+.sidebar-list:hover {
+    background: #eef6fb;
+    border-radius: 20px;
+    height: 40.31px;
+    font-weight: bold;
+}

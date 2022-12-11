@@ -1,0 +1,18 @@
+html body {
+    font-family: Segoe, Arial, sans-serif;
+}
+
+#app {
+    display: flex;
+    flex: 1 1 0px;
+    will-change: width;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+}
+
+.centerColumn {
+    flex: 1 1 0px;
+    display: flex;
+    overflow: hidden;
+}

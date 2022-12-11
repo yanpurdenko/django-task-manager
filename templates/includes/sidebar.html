@@ -1,0 +1,46 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-white" style="width: 280px; height: 93.2vh;
+	display: inline-block; margin-top: 11px">
+	<div>
+		<span class="sidebar-title">Lists</span>
+			<img class="sidebar-list-svg" src="/static/img/list.svg" alt="Bootstrap" width="20" height="20">
+	</div>
+	<hr>
+	<ul class="nav nav-pills flex-column mb-auto">
+		<li class="sidebar-list">
+			<a href="#" class="nav-link link-dark" aria-current="page">
+				<img class="sidebar-svg" src="/static/img/calendar-day.svg" alt="Bootstrap" width="16" height="16">
+				<span class="sidebar-list-title">Today</span>
+			</a>
+		</li>
+		<li class="sidebar-list">
+			<a href="#" class="nav-link link-dark">
+				<img class="sidebar-svg" src="/static/img/star.svg" alt="Bootstrap" width="16" height="16">
+				<span class="sidebar-list-title">Important</span>
+			</a>
+		</li>
+		<li class="sidebar-list">
+			<a href="#" class="nav-link link-dark">
+				<img class="sidebar-svg" src="/static/img/house-door.svg" alt="Bootstrap" width="16" height="16">
+				<span class="sidebar-list-title">All Tasks</span>
+			</a>
+			<hr>
+		</li>
+	</ul>
+	<hr>
+	<div class="dropdown">
+		<a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+			<img src="/static" alt="" width="32" height="32" class="rounded-circle me-2">
+			<span class="sidebar-list-title">Username</span>
+		</a>
+		<ul class="dropdown-menu text-small shadow">
+			<li><a class="dropdown-item" href="#">New list...</a></li>
+			<li><a class="dropdown-item" href="#">Settings</a></li>
+			<li><a class="dropdown-item" href="#">Profile</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#">Sign out</a></li>
+		</ul>
+	</div>
+</div>
