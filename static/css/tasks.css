@@ -1,0 +1,93 @@
+#main {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #faf9f8;
+}
+
+#centerColumn {
+    flex: 1 1 0;
+    display: flex;
+    overflow: hidden;
+}
+
+.tasksToolbar {
+    height: auto;
+    display: block;
+    position: relative;
+    align-items: center;
+    flex-shrink: 0;
+    margin: 16px 24px;
+}
+
+.tasksToolbar .tasksToolbar-top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+}
+
+.tasksToolbar-headline {
+    margin-right: 20px;
+    min-width: 100px;
+    flex: 1 1 0;
+}
+
+.tasksToolbar-titleItem {
+    min-width: 20px;
+}
+
+.listTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 2rem;
+    font-weight: 400;
+    padding: 6px 8px;
+    color: #2564cf;
+}
+
+.listTitleIcon {
+    margin-right: 8px;
+}
+
+.listTitleText {
+    font-family: Segoe, Arial, sans-serif;
+    font-size: 22px;
+    font-style: normal;
+}
+
+.flex-container {
+    position: relative;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.list-group {
+    margin-left: 34px;
+    margin-right: 34px;
+}
+
+.task-container {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgb(238, 237, 236);
+
+}
+
+.task-container:hover {
+    background: #eef6fb;
+}
+
+.task-title {
+    margin-left: 20px;
+    font-family: Segoe, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+}
