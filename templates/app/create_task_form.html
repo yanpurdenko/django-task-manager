@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block tasks-toolbar %}
+	<link rel="stylesheet" href="{% static 'css/task-form.css' %}">
+	<span id="centerColumn">
+		<div id="main" role="main">
+			<div class="tasksToolbar">
+				<div class="tasksToolbar-top">
+					<div class="tasksToolbar-headline">
+						<div class="tasksToolbar-titleItem">
+							<h2 class="listTitle">
+								<img class="listTitleIcon" src="/static/img/plus-lg.svg" alt="Bootstrap" width="22" height="22">
+								<span class="listTitleText">Add task</span>
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="create-task-container">
+				<div class="create-task-form-box">
+					<form method="POST" action="{% url "app:create-task" %}" novalidate>
+						{% csrf_token %}
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">What should you do?</label>
+							<input type="text" name="name" class="form-control" id="exampleFormControlInput1">
+						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlTextarea1" class="form-label">Comment</label>
+							<textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="4"></textarea>
+						</div>
+						<div style="display: flex">
+							<div class="create-task-deadline-box">
+								<span class="create-task-deadline-title">Deadline</span>
+								<div style="height: 8px;"></div>
+									<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+										<input name="deadline" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+										<div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+											<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+										</div>
+										<script>
+											$(function () {$("#datetimepicker1").datetimepicker();});
+										</script>
+									</div>
+							</div>
+							<div style="height: 70px; flex: 1 1 0; margin-bottom: 16px">
+								<div class="create-task-priority-box">
+									<div style="margin-left: 40px">
+										<div class="create-task-priority-title">
+											<span>Priority</span>
+										</div>
+											<div class="priority-selector">
+												<select name="priority" class="form-select" aria-label="Default select example">
+													<option selected></option>
+													{% for priority in priorities %}
+														<option name="priority" value="1">{{ priority }}</option>
+													{% endfor %}
+												</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="display: flex">
+							<div style="height: 70px; margin-bottom: 16px; width: 232.36px;">
+								<div class="create-task-assignees-box">
+									<div>
+										<div class="create-task-assignees-title">
+											<span>Assignees</span>
+										</div>
+											<div class="priority-selector">
+												<select name="assignees" class="form-select" aria-label="Default select example">
+													<option selected></option>
+													{% for worker in all_workers %}
+														<option name="assignees" value="1">{{ worker.first_name }} {{ worker.last_name }}</option>
+													{% endfor %}
+												</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="height: 70px; margin-bottom: 16px; flex: 1 1 0">
+								<div class="create-task-task-type-box">
+									<div style="margin-left: 40px">
+										<div class="create-task-task-type-title">
+											<span>Task Type</span>
+										</div>
+											<div class="priority-selector">
+												<select name="task_type" class="form-select" aria-label="Default select example">
+													<option selected></option>
+													{% for task_type in all_task_types %}
+														<option name="task_type" value="1">{{ task_type.name }}</option>
+													{% endfor %}
+												</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="display: inline-block;">
+							<input class="create-task-button" type="submit" value="Submit">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</span>
+{% endblock %}

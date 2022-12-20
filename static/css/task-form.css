@@ -1,0 +1,101 @@
+#main {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #faf9f8;
+}
+
+#centerColumn {
+    flex: 1 1 0;
+    display: flex;
+    overflow: hidden;
+}
+
+.tasksToolbar {
+    height: auto;
+    display: block;
+    position: relative;
+    align-items: center;
+    flex-shrink: 0;
+    margin: 16px 24px;
+}
+
+.tasksToolbar .tasksToolbar-top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+}
+
+.tasksToolbar-headline {
+    margin-right: 12px;
+    min-width: 100px;
+    flex: 1 1 0;
+    display: flex;
+}
+
+.tasksToolbar-titleItem {
+    min-width: 20px;
+    flex: 1 1 0;
+}
+
+.listTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 2rem;
+    font-weight: 400;
+    padding: 6px 8px;
+}
+
+.listTitleIcon {
+    margin-right: 8px;
+}
+
+.listTitleText {
+    font-family: Segoe, Arial, sans-serif;
+    font-size: 22px;
+    font-style: normal;
+}
+
+.create-task-container {
+    margin-left: 34px;
+    margin-right: 34px;
+}
+
+.create-task-form-box {
+    width: 60vh;
+    box-sizing: border-box;
+}
+
+.create-task-deadline-box {
+    margin-bottom: 16px;
+}
+
+.create-task-deadline-title {
+    margin-bottom: 8px;
+}
+
+.create-task-priority-title {
+    margin-bottom: 8px;
+}
+
+.create-task-button {
+    background: #2564cf;
+    border: #2564cf;
+    border-radius: 10px;
+    box-shadow: none;
+    color: white;
+    padding: 6px 8px;
+    margin-top: 16px;
+    width: 100px;
+}
+
+.create-task-assignees-title {
+    margin-bottom: 8px;
+}
+
+.create-task-task-type-title {
+    margin-bottom: 8px;
+}
