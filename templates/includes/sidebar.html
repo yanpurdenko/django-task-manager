@@ -10,21 +10,55 @@
 	<hr>
 	<ul class="nav nav-pills flex-column mb-auto">
 		<li class="sidebar-list">
-			<a href="#" class="nav-link link-dark" aria-current="page">
-				<img class="sidebar-svg" src="/static/img/calendar-day.svg" alt="Bootstrap" width="16" height="16">
-				<span class="sidebar-list-title">Today</span>
+			<a href="#" class="nav-link link-dark">
+				<div style="display: flex">
+					<div>
+						<img class="sidebar-svg" src="/static/img/calendar.svg" alt="Bootstrap" width="16" height="16">
+						<span class="sidebar-list-title">Today</span>
+					</div>
+					<div style="flex: 1 1 0; display: flex; align-items: center; justify-content: right">
+						<span class="sidebar-list-title" style="font-size: 14px">4</span>
+					</div>
+				</div>
+			</a>
+		</li>
+		<li class="sidebar-list">
+			<a href="{% url "app:critical-task" %}" class="nav-link link-dark">
+				<div style="display: flex">
+					<div>
+						<img class="sidebar-svg" src="/static/img/exclamation-triangle.svg" alt="Bootstrap" width="16" height="16">
+						<span class="sidebar-list-title">Critical</span>
+					</div>
+					<div style="flex: 1 1 0; display: flex; align-items: center; justify-content: right">
+						<span class="sidebar-list-title" style="font-size: 14px">{% block critical-count %}  {% endblock %}</span>
+					</div>
+				</div>
+			</a>
+		</li>
+		<li class="sidebar-list">
+			<a href="{% url "app:index" %}" class="nav-link link-dark">
+				<div style="display: flex">
+					<div>
+						<img class="sidebar-svg" src="/static/img/house-door.svg" alt="Bootstrap" width="16" height="16">
+						<span class="sidebar-list-title">All Tasks</span>
+					</div>
+					<div style="flex: 1 1 0; display: flex; align-items: center; justify-content: right">
+						<span class="sidebar-list-title" style="font-size: 14px">4</span>
+					</div>
+				</div>
 			</a>
 		</li>
 		<li class="sidebar-list">
 			<a href="#" class="nav-link link-dark">
-				<img class="sidebar-svg" src="/static/img/star.svg" alt="Bootstrap" width="16" height="16">
-				<span class="sidebar-list-title">Important</span>
-			</a>
-		</li>
-		<li class="sidebar-list">
-			<a href="#" class="nav-link link-dark">
-				<img class="sidebar-svg" src="/static/img/house-door.svg" alt="Bootstrap" width="16" height="16">
-				<span class="sidebar-list-title">All Tasks</span>
+				<div style="display: flex">
+					<div>
+						<img class="sidebar-svg" src="/static/img/people.svg" alt="Bootstrap" width="16" height="16">
+						<span class="sidebar-list-title">Workers</span>
+					</div>
+					<div style="flex: 1 1 0; display: flex; align-items: center; justify-content: right">
+						<span class="sidebar-list-title" style="font-size: 14px">4</span>
+					</div>
+				</div>
 			</a>
 			<hr>
 		</li>
@@ -40,7 +74,11 @@
 			<li><a class="dropdown-item" href="#">Settings</a></li>
 			<li><a class="dropdown-item" href="#">Profile</a></li>
 			<li><hr class="dropdown-divider"></li>
-			<li><a class="dropdown-item" href="#">Sign out</a></li>
+			{% if user.is_authenticated %}
+				<li><a class="dropdown-item" href=" {% url "login" %}">Sign out</a></li>
+			{% else %}
+
+			{% endif %}
 		</ul>
 	</div>
 </div>

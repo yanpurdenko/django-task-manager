@@ -11,6 +11,20 @@ html body {
     position: relative;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    text-decoration: none;
+    color: white;
+}
+
+.hover:hover {
+    background: #f5f5f5;
+}
+
 .centerColumn {
     flex: 1 1 0px;
     display: flex;
