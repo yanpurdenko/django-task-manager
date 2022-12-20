@@ -19,8 +19,8 @@
 }
 
 .sidebar-list:hover {
-    background: #eef6fb;
-    border-radius: 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
     height: 40.31px;
     font-weight: bold;
 }

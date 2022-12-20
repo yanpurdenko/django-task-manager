@@ -12,6 +12,16 @@
     overflow: hidden;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    text-decoration: none;
+    color: white;
+}
+
 .tasksToolbar {
     height: auto;
     display: block;
@@ -29,13 +39,15 @@
 }
 
 .tasksToolbar-headline {
-    margin-right: 20px;
+    margin-right: 12px;
     min-width: 100px;
     flex: 1 1 0;
+    display: flex;
 }
 
 .tasksToolbar-titleItem {
     min-width: 20px;
+    flex: 1 1 0;
 }
 
 .listTitle {
@@ -45,7 +57,6 @@
     font-size: 2rem;
     font-weight: 400;
     padding: 6px 8px;
-    color: #2564cf;
 }
 
 .listTitleIcon {
@@ -56,6 +67,16 @@
     font-family: Segoe, Arial, sans-serif;
     font-size: 22px;
     font-style: normal;
+}
+
+.addTaskButton {
+    margin-top: 10px;
+    background: #2564cf;
+    border: #2564cf;
+    border-radius: 10px;
+    box-shadow: none;
+    color: white;
+    padding: 6px 8px;
 }
 
 .flex-container {
@@ -72,22 +93,81 @@
 }
 
 .task-container {
-    margin-top: 5px;
     margin-bottom: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgb(238, 237, 236);
-
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgb(220 220 220);
+    position: relative;
 }
 
-.task-container:hover {
-    background: #eef6fb;
+.hover:hover {
+    background: #f5f5f5;
+}
+
+.taskItem {
+    display: flex;
+    flex-direction: column;
 }
 
 .task-title {
-    margin-left: 20px;
     font-family: Segoe, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
     font-style: normal;
     line-height: 20px;
+}
+
+.make-important-button {
+    cursor: pointer;
+    text-align: center;
+    height: 22px;
+    width: 22px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.deadline-info-box {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    color: #605e5c;
+    flex-wrap: wrap;
+}
+
+.deadline-info-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.deadline-info {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.deadline-info-icon {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.deadline-info-text {
+    margin-left: 4px;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    font-style: normal;
+}
+
+/*.detail-body {*/
+/*	padding: 0 16px 0 24px;*/
+/*	flex: 1;*/
+/*	margin-top: 16px;*/
+/*}*/
+
+.textarea-change-name-task:active {
+	color: black;
 }
