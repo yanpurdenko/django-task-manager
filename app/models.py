@@ -5,10 +5,10 @@ from django.db import models
 class Position(models.Model):
     POSITION_CHOICES = (
         ("developer", "Developer"),
-        ("pm", "Project Manager"),
+        ("project manager", "Project Manager"),
         ("designer", "Designer"),
         ("devops", "DevOps"),
-        ("qa", "QA"),
+        ("QA", "QA"),
     )
 
     name = models.CharField(max_length=255, choices=POSITION_CHOICES)
@@ -22,14 +22,14 @@ class Position(models.Model):
 
 class TaskType(models.Model):
     TASK_TYPE_CHOICES = (
-        ("bug", "bug"),
-        ("new_feature", "new feature"),
-        ("refactoring", "refactoring"),
+        ("Bug", "Bug"),
+        ("New Feature", "New Feature"),
+        ("Refactoring", "Refactoring"),
         ("QA", "QA"),
     )
 
     name = models.CharField(
-        max_length=255, choices=TASK_TYPE_CHOICES, blank=True, null=True
+        max_length=255, choices=TASK_TYPE_CHOICES
     )
 
     class Meta:
@@ -50,17 +50,16 @@ class Worker(AbstractUser):
 
     def __str__(self):
         return (
-            f"{self.username} (position: {self.position}, "
-            f"name: {self.first_name} {self.last_name})"
+            f"{self.first_name} {self.last_name})"
         )
 
 
 class Task(models.Model):
     PRIORITY_CHOICES = (
-        ("critical", "Critical"),
-        ("important", "Important"),
-        ("normal", "Normal"),
-        ("low", "Low"),
+        ("Critical", "Critical"),
+        ("Important", "Important"),
+        ("Normal", "Normal"),
+        ("Low", "Low"),
     )
 
     name = models.CharField(max_length=255, blank=False, null=False)
@@ -69,9 +68,11 @@ class Task(models.Model):
         auto_now=False, auto_now_add=False, blank=True, null=True
     )
     is_completed = models.BooleanField(default=False)
-    priority = models.CharField(max_length=9, choices=PRIORITY_CHOICES)
+    priority = models.CharField(
+        max_length=9, choices=PRIORITY_CHOICES, blank=False, null=False
+    )
     task_type = models.ForeignKey(
-        TaskType, on_delete=models.SET_NULL, related_name="tasks", null=True
+        TaskType, on_delete=models.SET_NULL, related_name="tasks", blank=True, null=True
     )
     assignees = models.ManyToManyField(Worker, related_name="assignees")
 
