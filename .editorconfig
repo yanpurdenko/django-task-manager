@@ -11,7 +11,10 @@ indent_size = 4
 
 [*.txt]
 indent_style = tab
-indent_size = 4
+
+[*.css]
+indent_style = tab
+indent_size = 2
 
 [*.html]
 indent_style = tab
