@@ -50,7 +50,7 @@ class Worker(AbstractUser):
 
     def __str__(self):
         return (
-            f"{self.first_name} {self.last_name})"
+            f"{self.first_name} {self.last_name}"
         )
 
 
@@ -74,7 +74,7 @@ class Task(models.Model):
     task_type = models.ForeignKey(
         TaskType, on_delete=models.SET_NULL, related_name="tasks", blank=True, null=True
     )
-    assignees = models.ManyToManyField(Worker, related_name="assignees")
+    assignees = models.ForeignKey(Worker, on_delete=models.CASCADE, related_name="assignees")
 
     class Meta:
         verbose_name = "task"

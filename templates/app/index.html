@@ -18,127 +18,126 @@
 						<div>
 							<div class="taskItem" data-store-id="{{ task.id }}">
 								<div class="hover" style="border-radius: 4px; padding: 0 16px; min-height: 52px; display: flex; align-items: center; position: relative; word-wrap: break-word; word-break: break-word; flex-wrap: wrap;">
-									<span style="padding: 0; cursor: pointer; height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-										<input class="form-check-input" style="margin: 0; height: 1.1em; width: 1.1em" type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
-									</span>
-									<button style="position: relative; flex: 1 1 0; min-height: 52px; padding: 8px 14px; line-height: 2rem; overflow: hidden; cursor: pointer; color: #323130; text-align: left; background: none; width: 100%; height: 100%; border: none; box-shadow: none;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-									aria-controls="offcanvasRight">
-										<span class="task-title" style="margin: 0; font-size: 16px">{{ task.name }}</span>
-										{% if task.deadline %}
-											<div class="deadline-info-box">
-												<span class="deadline-info-container">
-													<span class="deadline-info">
-														<img class="deadline-info-icon" src="/static/img/calendar-deadline.svg" alt="Bootstrap" width="12" height="12">
-														<span class="deadline-info-text">Deadline: {{ task.deadline }}</span>
+									<a style="display: flex; align-items: center; position: relative; word-wrap: break-word; word-break: break-word; flex-wrap: wrap;" href="{% url "app:update-task" pk=task.pk %}" >
+										<span style="padding: 0; cursor: pointer; height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
+											<input class="form-check-input" style="margin: 0; height: 1.1em; width: 1.1em" type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
+										</span>
+										<button style="position: relative; flex: 1 1 0; min-height: 52px; padding: 8px 14px; line-height: 2rem; overflow: hidden; cursor: pointer; color: #323130; text-align: left; background: none; width: 100%; height: 100%; border: none; box-shadow: none;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+										aria-controls="offcanvasRight">
+											<span class="task-title" style="margin: 0; font-size: 16px">{{ task.name }}</span>
+											{% if task.deadline %}
+												<div class="deadline-info-box">
+													<span class="deadline-info-container">
+														<span class="deadline-info">
+															<img class="deadline-info-icon" src="/static/img/calendar-deadline.svg" alt="Bootstrap" width="12" height="12">
+															<span class="deadline-info-text">Deadline: {{ task.deadline }}</span>
+														</span>
 													</span>
-												</span>
-											</div>
-										{% endif %}
-									</button>
+												</div>
+											{% endif %}
+										</button>
+									</a>
 										<div class="offcanvas offcanvas-end" style="height: 100%; display: flex; flex-direction: column; flex: 1; overflow: hidden; box-sizing: border-box; background-color: #faf9f8" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
 											<div class="detail-body" style="padding: 0 24px 0 24px; flex: 1; margin-top: 16px">
 												<div class="offcanvas-header" style="background-color: white; border-radius: 4px; justify-content: left">
 													<h5 class="offcanvas-title" id="offcanvasRightLabel" style="flex: 1 1 0;"><span style="font-size: 16px; line-height: 20px; font-weight: 400;">Task detail</span></h5>
 													<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 												</div>
-												<div class="hover offcanvas-body" style="padding: 0; margin-top: 16px;">
-													<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px; border-bottom: 0">
-														<div style="display: flex; align-items: center; padding: 14px 16px">
-															<span style="padding: 0; cursor: pointer; height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-																<input class="form-check-input" style="margin: 0; height: 1.1em; width: 1.1em" type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
-															</span>
-															<div style="position: relative; border-radius: 4px; font-size: 1.6rem; font-weight: 600; flex: 1 1 0">
-																<div style="padding: 0 16px 0 16px; width: 100%; overflow: visible; box-sizing: border-box" draggable="false">
-																	<div style="min-height: 15px; display: flex; user-select: text; height: auto; border: none; word-wrap: break-word; word-break: break-word; width: 100%;" title="{{ task.name }}">
-																		<textarea class="textarea-change-name-task" name="name" id="" rows="1" style="border: none; font-size: 14px; font-weight: 600; line-height: 20px; width: 100%;">{{ task.name }}</textarea>
+												<form action="{% url "app:update-task" pk=task.pk %}" method="post" novalidate> {% csrf_token %}
+													<div class="hover offcanvas-body" style="padding: 0; margin-top: 16px;">
+														<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px; border-bottom: 0">
+															<div style="display: flex; align-items: center; padding: 14px 16px">
+																<span style="padding: 0; cursor: pointer; height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
+																	<input class="form-check-input" style="margin: 0; height: 1.1em; width: 1.1em" type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
+																</span>
+																<div style="position: relative; border-radius: 4px; font-size: 1.6rem; font-weight: 600; flex: 1 1 0">
+																	<div style="padding: 0 16px 0 16px; width: 100%; overflow: visible; box-sizing: border-box" draggable="false">
+																		<div style="min-height: 15px; display: flex; user-select: text; height: auto; border: none; word-wrap: break-word; word-break: break-word; width: 100%;" title="{{ task.name }}">
+																			<textarea class="textarea-change-name-task" name="name" id="" rows="1" style="border: none; font-size: 14px; font-weight: 600; line-height: 20px; width: 100%;">{{ task.name }}</textarea>
+																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="hover" style="overflow-y: auto; margin-top: 16px;">
-													<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px 4px 0 0; border-bottom: 0">
-														<div style="display: flex; align-items: center; padding: 14px 16px">
-															<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-																<img src="/static/img/calendar-deadline.svg" alt="Bootstrap" width="20" height="20">
-															</div>
-															<div style="margin-left: 16px; flex: 1 1 0">
-																<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-																	<input name="deadline" class="form-control datetimepicker-input" placeholder="{{ task.deadline }}" style="padding: 0; border: none; font-size: 14px; line-height: 20px; color: #212529" data-target="#datetimepicker1"/>
-																	<div class="input-group-append" style="margin-left: 1px;" data-target="#datetimepicker1" data-toggle="datetimepicker">
-																		<div class="input-group-text" style="border: 1px solid #ced4da; border-radius: 4px;"><i class="fa fa-calendar"></i></div>
+													<div class="hover" style="overflow-y: auto; margin-top: 16px;">
+														<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px 4px 0 0; border-bottom: 0">
+															<div style="display: flex; align-items: center; padding: 14px 16px">
+																<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
+																	<img src="/static/img/calendar-deadline.svg" alt="Bootstrap" width="20" height="20">
+																</div>
+																<div style="margin-left: 16px; flex: 1 1 0">
+																	<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+																		<input name="deadline" class="form-control datetimepicker-input" placeholder="{{ task.deadline }}" style="padding: 0; border: none; font-size: 14px; line-height: 20px; color: #212529" data-target="#datetimepicker1"/>
+																		<div class="input-group-append" style="margin-left: 1px;" data-target="#datetimepicker1" data-toggle="datetimepicker">
+																			<div class="input-group-text" style="border: 1px solid #ced4da; border-radius: 4px;"><i class="fa fa-calendar"></i></div>
+																		</div>
+																		<script>
+																			$(function () {$("#datetimepicker1").datetimepicker();});
+																		</script>
 																	</div>
-																	<script>
-																		$(function () {$("#datetimepicker1").datetimepicker();});
-																	</script>
 																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="hover" style="overflow-y: auto;">
-													<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 0 0 4px 4px; border-bottom: 0">
-														<div style="display: flex; align-items: center; padding: 14px 16px">
-															<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-																<img src="/static/img/exclamation-circle.svg" alt="Bootstrap" width="20" height="20">
-															</div>
-															<div style="margin-left: 16px; flex: 1 1 0">
-																<select name="priority" class="form-select" style="border: none; padding: 0; font-size: 14px; line-height: 20px" aria-label="Default select example">
-																	<option selected>{{ task.priority }}</option>
-																	<option name="priority" value="1">Important</option>
-																	<option name="priority" value="1">Normal</option>
-																	<option name="priority" value="1">Low</option>
-																</select>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="hover" style="overflow-y: auto;">
-													<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 0 0 4px 4px; border-bottom: 0">
-														<div style="display: flex; align-items: center; padding: 14px 16px">
-															<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-																<img src="/static/img/people.svg" alt="Bootstrap" width="20" height="20">
-															</div>
-															<div style="margin-left: 16px; flex: 1 1 0">
-																<select name="assignees" class="form-select" style="border: none; padding: 0; font-size: 14px; line-height: 20px" aria-label="Default select example">
-																	<option selected>{{ task.assignees }}</option>
-																	<option name="priority" value="1">Daina Purdenko</option>
-																	<option name="priority" value="1">Oleksandra Dizanova</option>
-																	<option name="priority" value="1">Baks</option>
-																</select>
+													<div class="hover" style="overflow-y: auto;">
+														<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 0 0 4px 4px; border-bottom: 0">
+															<div style="display: flex; align-items: center; padding: 14px 16px">
+																<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
+																	<img src="/static/img/exclamation-circle.svg" alt="Bootstrap" width="20" height="20">
+																</div>
+																<div style="margin-left: 16px; flex: 1 1 0">
+																	<select name="priority" class="form-select" style="border: none; padding: 0; font-size: 14px; line-height: 20px" aria-label="Default select example">
+																		<option selected>{{ task.priority }}</option>
+																		<option name="priority" value="1">Important</option>
+																		<option name="priority" value="1">Normal</option>
+																		<option name="priority" value="1">Low</option>
+																	</select>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<div class="hover" style="overflow-y: auto;">
-													<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px 4px 0 0; border-bottom: 0">
-														<div style="display: flex; align-items: center; padding: 14px 16px">
-															<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-																<img src="/static/img/tag.svg" alt="Bootstrap" width="20" height="20">
-															</div>
-															<div style="margin-left: 16px; flex: 1 1 0">
-																<select name="task_type" class="form-select" style="border: none; padding: 0; font-size: 14px; line-height: 20px" aria-label="Default select example">
-																	<option selected>{{ task.task_type }}</option>
-																	<option name="priority" value="1">New Feature</option>
-																	<option name="priority" value="1">Refactoring</option>
-																	<option name="priority" value="1">QA</option>
-																</select>
+													<div class="hover" style="overflow-y: auto;">
+														<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 0 0 4px 4px; border-bottom: 0">
+															<div style="display: flex; align-items: center; padding: 14px 16px">
+																<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
+																	<img src="/static/img/people.svg" alt="Bootstrap" width="20" height="20">
+																</div>
+																<div style="margin-left: 16px; flex: 1 1 0">
+																	<select name="assignees" class="form-select" style="border: none; padding: 0; font-size: 14px; line-height: 20px" aria-label="Default select example">
+																		<option selected>{{ task.assignees }}</option>
+																		<option name="priority" value="1">Daina Purdenko</option>
+																		<option name="priority" value="1">Oleksandra Dizanova</option>
+																		<option name="priority" value="1">Baks</option>
+																	</select>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<label for="exampleFormControlTextarea1" style="display:block;">
-													<textarea class="form-control" style="padding: 12px; font-size: 14px; line-height: 20px; margin-top: 32px; border: none" name="description" placeholder="Add comment" id="exampleFormControlTextarea1" rows="3"></textarea>
-												</label>
-												<div style="display: block;">
-													<form action="{% url "app:update-task" pk=task.id %}" method="POST">{% csrf_token %}
+													<div class="hover" style="overflow-y: auto;">
+														<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px 4px 0 0; border-bottom: 0">
+															<div style="display: flex; align-items: center; padding: 14px 16px">
+																<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
+																	<img src="/static/img/tag.svg" alt="Bootstrap" width="20" height="20">
+																</div>
+																<div style="margin-left: 16px; flex: 1 1 0">
+																	<select name="task_type" class="form-select" style="border: none; padding: 0; font-size: 14px; line-height: 20px" aria-label="Default select example">
+																		<option selected>{{ task.task_type }}</option>
+																		<option name="priority" value="1">New Feature</option>
+																		<option name="priority" value="1">Refactoring</option>
+																		<option name="priority" value="1">QA</option>
+																	</select>
+																</div>
+															</div>
+														</div>
+													</div>
+													<label for="exampleFormControlTextarea1" style="display:block;">
+														<textarea class="form-control" style="padding: 12px; font-size: 14px; line-height: 20px; margin-top: 32px; border: none" name="description" placeholder="Add comment" id="exampleFormControlTextarea1" rows="3"></textarea>
+													</label>
+													<div style="display: block;">
 														<input type="submit" value="Update" style="background-color: #2564cf; border: #2564cf; border-radius: 10px; box-shadow: none; color: white; margin-top: 32px; padding: 6px 8px; width: 100%">
-{#														<button style="background-color: #2564cf; border: #2564cf; border-radius: 10px; box-shadow: none; color: white; margin-top: 32px; padding: 6px 8px; width: 100%" type="submit" class="create-task-button">#}
-{#															Update#}
-{#														</button>#}
-													</form>
-												</div>
+													</div>
+												</form>
 											</div>
 											<hr style="margin: 0 24px 0 24px">
 											<div class="detail-footer" style="position: relative; display: flex; align-items: center; padding: 24px 16px; margin: 0 24px 0 24px; justify-content: space-between">
@@ -154,9 +153,9 @@
 												</div>
 											</div>
 										</div>
-									<div class="set-priority-container">
-										<span class="task-title">{{ task.priority }}</span>
-									</div>
+{#									<div class="set-priority-container">#}
+{#										<span class="task-title">{{ task.priority }}</span>#}
+{#									</div>#}
 								</div>
 							</div>
 						</div>
