@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 
 class Position(models.Model):
@@ -53,6 +54,9 @@ class Worker(AbstractUser):
             f"{self.first_name} {self.last_name}"
         )
 
+    def get_absolute_url(self):
+        return reverse("app:worker-detail", kwargs={"pk": self.pk})
+
 
 class Task(models.Model):
     PRIORITY_CHOICES = (
@@ -64,17 +68,18 @@ class Task(models.Model):
 
     name = models.CharField(max_length=255, blank=False, null=False)
     description = models.TextField(blank=True, null=True)
-    deadline = models.DateTimeField(
+    deadline = models.DateField(
         auto_now=False, auto_now_add=False, blank=True, null=True
     )
     is_completed = models.BooleanField(default=False)
     priority = models.CharField(
         max_length=9, choices=PRIORITY_CHOICES, blank=False, null=False
     )
-    task_type = models.ManyToManyField(
-        TaskType, related_name="task_types", blank=True, null=True
+    task_type = models.ForeignKey(
+        TaskType, on_delete=models.SET_NULL, related_name="task_types", blank=True, null=True
     )
     assignees = models.ForeignKey(Worker, on_delete=models.CASCADE, related_name="assignees")
+    created_date = models.DateField(auto_now_add=True, blank=False, null=False)
 
     class Meta:
         verbose_name = "task"

@@ -4,7 +4,7 @@ html body {
 
 #app {
     display: flex;
-    flex: 1 1 0px;
+    flex: 1 1 0;
     will-change: width;
     box-sizing: border-box;
     overflow: hidden;
@@ -26,7 +26,7 @@ a:hover{
 }
 
 .centerColumn {
-    flex: 1 1 0px;
+    flex: 1 1 0;
     display: flex;
     overflow: hidden;
 }

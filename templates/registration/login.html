@@ -70,45 +70,43 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/css/login.css" rel="stylesheet">
+
   </head>
+
   <body class="text-center">
+		<main class="form-signin w-100 m-auto">
+			<form method="post" action="{% url "login" %}" novalidate>
+				{% csrf_token %}
+				<img class="mb-4" src="/static/img/checkbox.png" alt="" width="72" height="72">
+				<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-<main class="form-signin w-100 m-auto">
-  <form method="post" action="{% url "login" %}" novalidate>
-		{% csrf_token %}
-    <img class="mb-4" src="/static/img/checkbox.png" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+				{% if form.errors %}
+					<div class="alert alert-danger" role="alert">
+						Username or password invalid. Please try again.
+					</div>
+				{% endif %}
 
-		{% if form.errors %}
-			<div class="alert alert-danger" role="alert">
-				Username or password invalid. Please try again.
-			</div>
-		{% endif %}
+				<div class="form-floating">
+					<input name="username" class="form-control" id="floatingInput" placeholder="Username">
+					<label for="floatingInput">Username</label>
+				</div>
+				<div class="form-floating">
+					<input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+					<label for="floatingPassword">Password</label>
+				</div>
 
-    <div class="form-floating">
-      <input name="username" class="form-control" id="floatingInput" placeholder="Username">
-      <label for="floatingInput">Username</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>
+				<div class="checkbox mb-3">
+					<label>
+						<input type="checkbox" value="remember-me"> Remember me
+					</label>
+				</div>
+				<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-
-		<div class="signup-box">
-			<a href="#">Sign up</a>
-		</div>
-		<p class="mt-5 mb-3 text-muted">© 2022</p>
-  </form>
-</main>
-
-
-
+				<div class="signup-box">
+					<a href="{% url "app:create-worker" %}">Sign up</a>
+				</div>
+				<p class="mt-5 mb-3 text-muted">© 2022</p>
+			</form>
+		</main>
   </body>
 </html>
