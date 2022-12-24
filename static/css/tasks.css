@@ -7,9 +7,10 @@
 }
 
 #centerColumn {
-    flex: 1 1 0;
-    display: flex;
-    overflow: hidden;
+	flex: 1 1 0;
+	display: flex;
+	overflow: hidden;
+	height: 94.1vh;
 }
 
 a:hover{
@@ -65,13 +66,14 @@ a:hover{
 }
 
 .addTaskButton {
-    margin-top: 10px;
-    background: #2564cf;
-    border: #2564cf;
-    border-radius: 10px;
-    box-shadow: none;
-    color: white;
-    padding: 6px 8px;
+	margin-top: 10px;
+	background: #2564cf;
+	border: #2564cf;
+	border-radius: 10px;
+	box-shadow: none;
+	text-decoration: none;
+	color: white;
+	padding: 6px 8px;
 }
 
 .flex-container {
@@ -90,7 +92,6 @@ a:hover{
 .task-container {
     margin-bottom: 10px;
     border-radius: 10px;
-    box-shadow: 0 0 5px rgb(220 220 220);
     position: relative;
 }
 

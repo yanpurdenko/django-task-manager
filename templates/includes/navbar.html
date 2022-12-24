@@ -1,3 +1,4 @@
+{% load crispy_forms_filters %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
@@ -13,8 +14,12 @@
 		<div class="collapse navbar-collapse" id="navbarsExample07">
 			<ul class="me-auto">
 			</ul>
-			<form role="search">
-				<input class="form-control" type="search" placeholder="Search" aria-label="Search">
+			<form action="" method="get" role="search">
+				<div id="div_id_name">
+					<div>
+						<input class="textinput textInput form-control" placeholder="Search" id="id_name" maxlength="255" name="name" required="" type="text">
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
