@@ -7,7 +7,7 @@ from django.views import generic
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from app.forms import WorkerCreationForm, AllTasksSearchForm
+from app.forms import WorkerCreationForm, TasksSearchForm
 from app.models import Task, Worker, TaskType, Position
 
 
@@ -19,26 +19,29 @@ def index(request):
     request.session["num_visits"] = num_visits + 1
 
     context = {
-        "all_tasks": Task.objects.all().select_related(),
-        "all_priorities": [priority[1] for priority in Task.PRIORITY_CHOICES],
-        "all_workers_without_user": Worker.objects.exclude(first_name=request.user.first_name).select_related(),
-        "all_task_types": TaskType.objects.all(),
-        "search_form": AllTasksSearchForm()
+        "tasks": Task.objects.all().select_related(),
+        "priorities": [priority[1] for priority in Task.PRIORITY_CHOICES],
+        "workers_without_user": Worker.objects.exclude(first_name=request.user.first_name).select_related(),
+        "task_types": TaskType.objects.all(),
+        "search_form": TasksSearchForm()
     }
 
     return render(request, "app/index.html", context=context)
 
 
-class CriticalTaskListView(LoginRequiredMixin, ListView):
+class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "app/critical-task-list.html"
+    paginate_by = 9
+    queryset = Task.objects.all().select_related()
 
-    def get(self, request, *args, **kwargs):
-        context = {
-            "all_critical_tasks": Task.objects.filter(priority="Critical", assignees=request.user).select_related()
-        }
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CriticalTaskListView, self).get_context_data(**kwargs)
+        user = self.request.user
 
-        return render(request, self.template_name, context=context)
+        context["critical_tasks"] = Task.objects.filter(priority="Critical", assignees=user).select_related()
+
+        return context
 
     def get_queryset(self):
         name = self.request.GET.get("name")
@@ -49,69 +52,80 @@ class CriticalTaskListView(LoginRequiredMixin, ListView):
         return self.queryset
 
 
-class ImportantTaskListView(LoginRequiredMixin, ListView):
+class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "app/important-task-list.html"
+    paginate_by = 9
 
-    def get(self, request, *args, **kwargs):
-        context = {
-            "all_important_tasks": Task.objects.filter(priority="Important", assignees=request.user).select_related()
-        }
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ImportantTaskListView, self).get_context_data(**kwargs)
+        user = self.request.user
 
-        return render(request, self.template_name, context=context)
+        context["important_tasks"] = Task.objects.filter(priority="Important", assignees=user).select_related()
+
+        return context
 
 
 class NormalTaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "app/normal-task-list.html"
+    paginate_by = 9
 
-    def get(self, request, *args, **kwargs):
-        context = {
-            "all_normal_tasks": Task.objects.filter(priority="Normal", assignees=request.user).select_related()
-        }
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(NormalTaskListView, self).get_context_data(**kwargs)
+        user = self.request.user
 
-        return render(request, self.template_name, context=context)
+        context["normal_tasks"] = Task.objects.filter(priority="Normal", assignees=user).select_related()
+
+        return context
 
 
-class LowTaskListView(LoginRequiredMixin, ListView):
+class LowTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "app/low-task-list.html"
+    paginate_by = 9
 
-    def get(self, request, *args, **kwargs):
-        context = {
-            "all_critical_tasks": Task.objects.filter(priority="Low", assignees=request.user).select_related()
-        }
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(LowTaskListView, self).get_context_data(**kwargs)
+        user = self.request.user
 
-        return render(request, self.template_name, context=context)
+        context["low_tasks"] = Task.objects.filter(priority="Low", assignees=user).select_related()
+
+        return context
 
 
-class TodayTaskListView(LoginRequiredMixin, ListView):
+class TodayTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "app/today-task-list.html"
+    paginate_by = 9
 
-    def get(self, request, *args, **kwargs):
-        context = {
-            "today_tasks": Task.objects.filter(
-                deadline=datetime.date.today(), assignees=request.user
-            ).select_related()
-        }
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TodayTaskListView, self).get_context_data(**kwargs)
+        user = self.request.user
 
-        return render(request, self.template_name, context=context)
+        context["today_tasks"] = Task.objects.filter(
+            deadline=datetime.date.today(), assignees=user
+        ).select_related()
+
+        return context
 
 
-class MyTaskListView(LoginRequiredMixin, ListView):
+class MyTaskListView(LoginRequiredMixin, generic.ListView):
+    model = Task
     template_name = "app/my-task-list.html"
+    paginate_by = 9
+    queryset = Task.objects.all().select_related()
 
-    def get(self, request, *args, **kwargs):
-        context = {
-            "my_tasks": Task.objects.filter(assignees=request.user)
-        }
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(MyTaskListView, self).get_context_data(**kwargs)
+        user = self.request.user
 
-        return render(request, self.template_name, context=context)
+        context["my_tasks"] = Task.objects.filter(assignees=user).select_related()
+
+        return context
 
     def get_queryset(self):
         name = self.request.GET.get("name")
-
         if name:
             return self.queryset.filter(name__icontains=name)
 
@@ -126,13 +140,10 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(TaskCreateView, self).get_context_data(**kwargs)
-        all_priorities = [priority[1] for priority in Task.PRIORITY_CHOICES]
-        all_workers = Worker.objects.all()
-        all_task_types = TaskType.objects.all()
 
-        context["priorities"] = all_priorities
-        context["all_workers"] = all_workers
-        context["all_task_types"] = all_task_types
+        context["priorities"] = [priority[1] for priority in Task.PRIORITY_CHOICES]
+        context["workers"] = Worker.objects.all()
+        context["task_types"] = TaskType.objects.all()
 
         return context
 
@@ -144,13 +155,10 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(TaskUpdateView, self).get_context_data(**kwargs)
-        all_priorities = [priority[1] for priority in Task.PRIORITY_CHOICES]
-        all_workers = Worker.objects.all()
-        all_task_types = TaskType.objects.all()
 
-        context["priorities"] = all_priorities
-        context["all_workers"] = all_workers
-        context["all_task_types"] = all_task_types
+        context["priorities"] = [priority[1] for priority in Task.PRIORITY_CHOICES]
+        context["workers"] = Worker.objects.all()
+        context["task_types"] = TaskType.objects.all().select_related()
 
         return context
 
@@ -168,7 +176,7 @@ class WorkerCreateView(generic.CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(WorkerCreateView, self).get_context_data(**kwargs)
-        positions = Position.objects.all()
+        positions = Position.objects.all().select_related()
 
         context["positions"] = positions
 
