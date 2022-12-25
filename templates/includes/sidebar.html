@@ -201,7 +201,7 @@
 				<img src="/static" alt="" width="32" height="32" class="rounded-circle ms-3">
 			</a>
 			<ul class="dropdown-menu text-small shadow">
-				<li><a class="dropdown-item" href="#">Profile</a></li>
+				<li><a class="dropdown-item" href="{% url "app:worker-profile" %}">Profile</a></li>
 				<li><hr class="dropdown-divider"></li>
 				{% if user.is_authenticated %}
 					<li><a class="dropdown-item" href=" {% url "login" %}">Sign out</a></li>

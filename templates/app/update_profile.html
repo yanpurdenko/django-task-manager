@@ -1,0 +1,54 @@
+{% extends "app/profile.html" %}
+
+{% block profile_info %}
+<div class="card mb-3">
+	<div class="card-body">
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<input type="text" class="form-control" value="Yan">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Surname</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<input type="text" class="form-control" value="Purdenko">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Username</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<input type="text" class="form-control" value="admin">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Email</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<input type="text" class="form-control" value="admin@admin.com">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Phone</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<input type="text" class="form-control" value="+38 (095) 021-9060">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-9 text-secondary">
+				<input type="button" class="btn addTaskButton" value="Save Changes">
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
