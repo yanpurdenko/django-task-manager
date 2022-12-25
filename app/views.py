@@ -32,7 +32,6 @@ def index(request):
 class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "app/critical-task-list.html"
-    paginate_by = 9
     queryset = Task.objects.all().select_related()
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -55,7 +54,6 @@ class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
 class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "app/important-task-list.html"
-    paginate_by = 9
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ImportantTaskListView, self).get_context_data(**kwargs)
@@ -69,7 +67,6 @@ class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
 class NormalTaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "app/normal-task-list.html"
-    paginate_by = 9
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(NormalTaskListView, self).get_context_data(**kwargs)
@@ -83,7 +80,6 @@ class NormalTaskListView(LoginRequiredMixin, ListView):
 class LowTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "app/low-task-list.html"
-    paginate_by = 9
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(LowTaskListView, self).get_context_data(**kwargs)
@@ -97,7 +93,6 @@ class LowTaskListView(LoginRequiredMixin, generic.ListView):
 class TodayTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "app/today-task-list.html"
-    paginate_by = 9
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TodayTaskListView, self).get_context_data(**kwargs)
@@ -113,7 +108,6 @@ class TodayTaskListView(LoginRequiredMixin, generic.ListView):
 class MyTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = "app/my-task-list.html"
-    paginate_by = 9
     queryset = Task.objects.all().select_related()
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -121,6 +115,7 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
         user = self.request.user
 
         context["my_tasks"] = Task.objects.filter(assignees=user).select_related()
+        context["search_form"] = TasksSearchForm()
 
         return context
 
