@@ -66,14 +66,21 @@ a:hover{
 }
 
 .addTaskButton {
-	margin-top: 10px;
 	background: #2564cf;
 	border: #2564cf;
-	border-radius: 10px;
+	border-radius: 0.375rem;
 	box-shadow: none;
 	text-decoration: none;
 	color: white;
-	padding: 6px 8px;
+	padding: 6px 12px;
+}
+
+.addTaskButton:hover {
+	background: #1d55af;
+	border: #1d55af;
+	color: white;
+	box-shadow: none;
+	text-decoration: none;
 }
 
 .flex-container {

@@ -94,7 +94,7 @@
 
 														{% endif %}
 													</option>
-													{% for worker in all_workers %}
+													{% for worker in workers %}
 														<option value="{{ worker }}">{{ worker }}</option>
 													{% endfor %}
 												</select>
@@ -117,7 +117,7 @@
 
 														{% endif %}
 													</option>
-													{% for task_type in all_task_types %}
+													{% for task_type in task_types %}
 														<option value="{{ task_type.name }}">{{ task_type.name }}</option>
 													{% endfor %}
 												</select>
