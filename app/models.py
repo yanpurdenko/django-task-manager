@@ -1,3 +1,4 @@
+from PIL import Image
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
@@ -56,6 +57,26 @@ class Worker(AbstractUser):
 
     def get_absolute_url(self):
         return reverse("app:worker-detail", kwargs={"pk": self.pk})
+
+
+class Profile(models.Model):
+    worker = models.OneToOneField(Worker, on_delete=models.CASCADE)
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    phone = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.worker.username
+
+    def save(self, *args, **kwargs):
+        super().save()
+
+        img = Image.open(self.avatar.path)
+
+        if img.height > 100 or img.width > 100:
+            new_img = (100, 100)
+            img.thumbnail(new_img)
+            img.save(self.avatar.path)
 
 
 class Task(models.Model):
