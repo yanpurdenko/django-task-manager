@@ -6,10 +6,10 @@ from django.urls import reverse
 
 class Position(models.Model):
     POSITION_CHOICES = (
-        ("developer", "Developer"),
-        ("project manager", "Project Manager"),
-        ("designer", "Designer"),
-        ("devops", "DevOps"),
+        ("Developer", "Developer"),
+        ("Project manager", "Project Manager"),
+        ("Designer", "Designer"),
+        ("Devops", "DevOps"),
         ("QA", "QA"),
     )
 

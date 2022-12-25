@@ -5,16 +5,16 @@
 				<h6 class="mb-0">Name</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				Yan Purdenko
+				{{ worker.first_name }}
 			</div>
 		</div>
 		<hr>
 		<div class="row">
 			<div class="col-sm-3">
-				<h6 class="mb-0">Surname</h6>
+				<h6 class="mb-0">Last name</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				Purdenko
+				{{ worker.last_name }}
 			</div>
 		</div>
 		<hr>
@@ -23,7 +23,7 @@
 				<h6 class="mb-0">Username</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				admin
+				{{ worker.username }}
 			</div>
 		</div>
 		<hr>
@@ -32,7 +32,7 @@
 				<h6 class="mb-0">Email</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				admin@admin.com
+				{{ worker.email }}
 			</div>
 		</div>
 		<hr>
@@ -41,7 +41,7 @@
 				<h6 class="mb-0">Phone</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				+38 (095) 021-9060
+				{{ worker.profile.phone }}
 			</div>
 		</div>
 		<hr>

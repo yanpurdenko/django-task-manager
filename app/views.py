@@ -179,8 +179,14 @@ class WorkerCreateView(generic.CreateView):
 
 
 @login_required()
-def worker_profile_view(request):
-    return render(request, "app/profile.html")
+def profile_view(request):
+    worker = Worker.objects.get(id=request.user.id)
+
+    context = {
+        "worker": worker
+    }
+
+    return render(request, "app/profile.html", context=context)
 
 # @login_required
 # def profile(request):
