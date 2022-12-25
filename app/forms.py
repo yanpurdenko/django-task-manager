@@ -11,7 +11,5 @@ class WorkerCreationForm(UserCreationForm):
         fields = UserCreationForm.Meta.fields + ("email", "first_name", "last_name", "position",)
 
 
-class AllTasksSearchForm(forms.Form):
+class TasksSearchForm(forms.Form):
     name = forms.CharField(max_length=255, required=True)
-
-
