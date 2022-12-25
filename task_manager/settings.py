@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "livereload",
     "django.contrib.staticfiles",
     "app",
+    "users",
     "crispy_forms",
     "bootstrap5",
     "debug_toolbar",
