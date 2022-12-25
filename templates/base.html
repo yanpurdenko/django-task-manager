@@ -68,57 +68,58 @@
 
 				{% block tasks-toolbar %}
 					<link rel="stylesheet" href="{% static 'css/tasks.css' %}">
-						<span id="centerColumn">
-							<div id="main" role="main">
-								<div class="tasksToolbar">
-									<div class="tasksToolbar-top">
-										<div class="tasksToolbar-headline">
-											<div class="tasksToolbar-titleItem">
-												<h2 class="listTitle">
+					<span id="centerColumn">
+						<div id="main" role="main">
+							<div class="tasksToolbar">
+								<div class="tasksToolbar-top">
+									<div class="tasksToolbar-headline">
+										<div class="tasksToolbar-titleItem">
+											<h2 class="listTitle">
 
-													{% block tasks-toolbar-icon %}
-
-													{% endblock %}
-
-													<span class="listTitleText">
-
-														{% block tasks-toolbar-title %}
-
-														{% endblock %}
-
-													</span>
-												</h2>
-											</div>
-											<div>
-												<button class="addTaskButton">
-													<a href="{% url 'app:create-task' %}"><span style="color: white; text-decoration: none">Add Task</span></a>
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="flex-container">
-									<div class="list-group">
-
-										{% block tasks-existence-check %}
-											<!-- Redefine "if" -->
-
-												{% block task-iterator %}
-													<!-- Redefine "for" -->
-
-														{% block content %}
-															<!-- Redefine content -->
-
-														{% endblock %}
+												{% block tasks-toolbar-icon %}
 
 												{% endblock %}
 
-										{% endblock %}
+												<span class="listTitleText">
 
+													{% block tasks-toolbar-title %}
+
+													{% endblock %}
+
+												</span>
+											</h2>
+										</div>
+										<div>
+											<button class="addTaskButton">
+												<a style="text-decoration: none" href="{% url 'app:create-task' %}"><span style="color: white; text-decoration: none">Add Task</span></a>
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
-						</span>
+							<div class="flex-container p-3 pt-2 overflow-auto">
+								<div class="list-group">
+
+									{% block tasks-existence-check %}
+										<!-- Redefine "if" -->
+
+											{% block task-iterator %}
+												<!-- Redefine "for" -->
+
+													{% block content %}
+														<!-- Redefine content -->
+
+													{% endblock %}
+
+											{% endblock %}
+
+									{% endblock %}
+
+								</div>
+							</div>
+							<div style="height: 34px;"></div>
+						</div>
+					</span>
 				{% endblock %}
 			</div>
 		{% endblock %}
