@@ -10,13 +10,16 @@
 {% endblock %}
 
 {% block tasks-existence-check %}
-	{% if all_tasks %}
+	{% if tasks %}
 		{% block task-iterator %}
-			{% for task in all_tasks %}
+			{% for task in tasks %}
 				{% block content %}
-					{% include "app/task-list.html" %}
+					{% include "includes/task-list.html" %}
 				{% endblock %}
 			{% endfor %}
 		{% endblock %}
 	{% endif %}
 {% endblock %}
+{#{% block pagination %}#}
+{#	{% include "includes/pagination.html" %}#}
+{#{% endblock %}#}
