@@ -84,6 +84,7 @@ class Task(models.Model):
     class Meta:
         verbose_name = "task"
         verbose_name_plural = "tasks"
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
