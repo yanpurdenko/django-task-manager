@@ -11,11 +11,11 @@
 {% endblock %}
 
 {% block tasks-existence-check %}
-	{% if all_critical_tasks %}
+	{% if critical_tasks %}
 		{% block task-iterator %}
-			{% for task in all_critical_tasks %}
+			{% for task in critical_tasks %}
 				{% block content %}
-					{% include "app/task-list.html" %}
+					{% include "includes/task-list.html" %}
 				{% endblock %}
 			{% endfor %}
 		{% endblock %}
