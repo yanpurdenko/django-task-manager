@@ -48,14 +48,12 @@
 		<div class="d-flex" style="justify-content: space-between">
 			<div class="row">
 				<div class="col-sm-12">
-					<form method="POST" action="{% url "users:update-profile" %}"> {% csrf_token %}
-						<a class="btn addTaskButton" methods="post" href="{% url "users:update-profile" %}" ><span>Edit</span></a>
-					</form>
+					<a class="btn addTaskButton" methods="post" href="{% url "users:update-profile" %}" ><span>Edit profile</span></a>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm">
-					<button class="btn addTaskButton">Change password</button>
+					<a class="btn addTaskButton" methods="post" href="#" ><span>Change password</span></a>
 				</div>
 			</div>
 		</div>

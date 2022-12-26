@@ -5,7 +5,7 @@ from app.models import Worker
 
 class Profile(models.Model):
     worker = models.OneToOneField(Worker, on_delete=models.CASCADE)
-    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    avatar = models.ImageField(default="default.jpg", upload_to="profile_images")
     phone = models.CharField(max_length=255)
     main_programming_language = models.CharField(max_length=255)
 

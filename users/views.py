@@ -11,7 +11,7 @@ def profile_view(request):
     worker = Worker.objects.get(id=request.user.id)
     profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
-    return render(request, "app/profile.html", {"worker": worker, "profile_form": profile_form})
+    return render(request, "users/profile.html", {"worker": worker, "profile_form": profile_form})
 
 
 @login_required
@@ -28,7 +28,7 @@ def update_profile_view(request):
             messages.success(request, "Your profile is updated successfully")
             return redirect("users:worker-profile")
 
-        return render(request, "app/update_profile.html", {
+        return render(request, "users/update_profile.html", {
             "user_form": user_form, "profile_form": profile_form, "worker": worker
         })
-    return render(request, "app/update_profile.html", {"worker": worker})
+    return render(request, "users/update_profile.html", {"worker": worker})

@@ -15,7 +15,9 @@ class UpdateUserForm(forms.ModelForm):
 
 
 class UpdateProfileForm(forms.ModelForm):
-    avatar = forms.ImageField(widget=forms.FileInput(attrs={"class": "btn addButtonTask"}))
+    avatar = forms.ImageField(widget=forms.FileInput(attrs={
+        "class": "btn btn-primary addButtonTask m-0", "placeholder": "", "value": ""
+    }))
     phone = forms.CharField(max_length=255)
     main_programming_language = forms.CharField(max_length=255)
 
