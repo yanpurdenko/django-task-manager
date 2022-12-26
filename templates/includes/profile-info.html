@@ -29,10 +29,10 @@
 		<hr>
 		<div class="row">
 			<div class="col-sm-3">
-				<h6 class="mb-0">Email</h6>
+				<h6 class="mb-0">Main Language</h6>
 			</div>
 			<div class="col-sm-9 text-secondary">
-				{{ worker.email }}
+				{{ worker.profile.main_programming_language }}
 			</div>
 		</div>
 		<hr>
@@ -48,7 +48,9 @@
 		<div class="d-flex" style="justify-content: space-between">
 			<div class="row">
 				<div class="col-sm-12">
-					<a class="btn addTaskButton" href="#"><span>Edit</span></a>
+					<form method="POST" action="{% url "users:update-profile" %}"> {% csrf_token %}
+						<a class="btn addTaskButton" methods="post" href="{% url "users:update-profile" %}" ><span>Edit</span></a>
+					</form>
 				</div>
 			</div>
 			<div class="row">

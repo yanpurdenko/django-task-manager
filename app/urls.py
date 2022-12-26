@@ -28,6 +28,8 @@ urlpatterns = [
     path("tasks/<int:pk>/update", TaskUpdateView.as_view(), name="update-task"),
     path("tasks/<int:pk>/delete", TaskDeleteView.as_view(), name="delete-task"),
     path("tasks/create", WorkerCreateView.as_view(), name="create-worker"),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)
 
 app_name = "app"
