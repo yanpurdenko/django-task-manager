@@ -26,9 +26,14 @@ def update_profile_view(request):
             user_form.save()
             profile_form.save()
             messages.success(request, "Your profile is updated successfully")
-            return redirect("users:worker-profile")
+            return redirect("users:profile")
 
         return render(request, "users/update_profile.html", {
             "user_form": user_form, "profile_form": profile_form, "worker": worker
         })
     return render(request, "users/update_profile.html", {"worker": worker})
+
+
+@login_required
+def workers_profiles_list_view(request):
+    return render(request, "users/workers-profiles.html")

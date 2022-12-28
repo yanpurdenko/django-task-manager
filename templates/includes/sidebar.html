@@ -115,7 +115,7 @@
 				</a>
 			</div>
 			<div class="hover">
-				<li class="mb-3 px-4">
+				<li class="px-4">
 					<div class="d-flex sidebar-ls-height">
 						<div style="padding-top: 9px;">
 							<img src="/static/img/exclamation-circle.svg" alt="Bootstrap" width="18" height="18">
@@ -194,6 +194,22 @@
 					</div>
 				</li>
 			</div>
+			<div class="mb-3 hover">
+				<a href="{% url "users:workers-profiles" %}" class="nav-link link-dark">
+					<li>
+						<div class="mb-1 px-4 d-flex sidebar-ls-height">
+							<div class="d-flex">
+								<div class="pt-2">
+									<img src="/static/img/people.svg" alt="Bootstrap" width="18" height="18">
+								</div>
+							</div>
+							<button style="border: none; border-radius: 0; box-shadow: none; padding: 6px 16px;" class="btn btn-toggle d-inline-flex align-items-center">
+								<span class="sidebar-ls-title">Workers</span>
+							</button>
+						</div>
+					</li>
+				</a>
+			</div>
 		</ul>
 		<div class="dropdown p-4">
 			<a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -201,7 +217,7 @@
 				<img src="/static" alt="" width="32" height="32" class="rounded-circle ms-3">
 			</a>
 			<ul class="dropdown-menu text-small shadow">
-				<li><a class="dropdown-item" href="{% url "users:worker-profile" %}">Profile</a></li>
+				<li><a class="dropdown-item" href="{% url "users:profile" %}">Profile</a></li>
 				<li><hr class="dropdown-divider"></li>
 				{% if user.is_authenticated %}
 					<li><a class="dropdown-item" href=" {% url "login" %}">Sign out</a></li>

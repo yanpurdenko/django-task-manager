@@ -18,8 +18,13 @@ def index(request):
     num_visits = request.session.get("num_visits", 0)
     request.session["num_visits"] = num_visits + 1
 
+    query_set = Task.objects.all().select_related()
+
+    if request.GET.get("name") is not None:
+        query_set = query_set.filter(name__icontains=request.GET.get("name"))
+
     context = {
-        "tasks": Task.objects.all().select_related(),
+        "tasks": query_set,
         "priorities": [priority[1] for priority in Task.PRIORITY_CHOICES],
         "workers_without_user": Worker.objects.exclude(first_name=request.user.first_name).select_related(),
         "task_types": TaskType.objects.all(),
@@ -131,7 +136,8 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     fields = ["name", "description", "deadline", "priority", "task_type", "assignees"]
     template_name = "app/task_form.html"
-    success_url = reverse_lazy("app:index")
+    # success_url = reverse_lazy("app:index")
+    success_url = "https://google.com"
 
     def get_context_data(self, **kwargs):
         context = super(TaskCreateView, self).get_context_data(**kwargs)
