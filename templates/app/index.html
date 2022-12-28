@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block tasks-toolbar-title %}
+	All Tasks
+{% endblock %}
+
+{% block tasks-toolbar-icon %}
+	<img class="listTitleIcon" src="/static/img/house-door.svg" alt="Bootstrap" width="22" height="22">
+{% endblock %}
+
+{% block tasks-existence-check %}
+	{% if tasks %}
+		{% block task-iterator %}
+			{% for task in tasks %}
+				{% block content %}
+					{% include "includes/task-list.html" %}
+				{% endblock %}
+			{% endfor %}
+		{% endblock %}
+	{% endif %}
+{% endblock %}
+{#{% block pagination %}#}
+{#	{% include "includes/pagination.html" %}#}
+{#{% endblock %}#}
