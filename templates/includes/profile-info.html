@@ -1,0 +1,61 @@
+<div class="card mb-3">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{ worker.first_name }}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Last name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{ worker.last_name }}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Username</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{ worker.username }}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Main Language</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{ worker.profile.main_programming_language }}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Phone</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{ worker.profile.phone }}
+			</div>
+		</div>
+		<hr>
+		<div class="d-flex" style="justify-content: space-between">
+			<div class="row">
+				<div class="col-sm-12">
+					<a class="btn addTaskButton" methods="post" href="{% url "users:update-profile" %}" ><span>Edit profile</span></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm">
+					<a class="btn addTaskButton" methods="post" href="#" ><span>Change password</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
