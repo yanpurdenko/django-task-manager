@@ -7,8 +7,8 @@
 				<span style="padding: 0; cursor: pointer; height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
 					<input class="form-check-input" style="margin: 0; height: 1.1em; width: 1.1em" type="checkbox" id="checkboxNoLabel" value="" aria-label="..." />
 				</span>
-				<button style="position: relative; flex: 1 1 0; min-height: 52px; padding: 8px 14px; overflow: hidden; cursor: pointer; color: #323130; text-align: left; background: none; width: 100%; height: 100%; border: none; box-shadow: none;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-					<span class="task-title" style="margin: 0; font-size: 16px">{{ task.name }}</span>
+				<a role="button" href="{% url "app:task-detail" pk=task.id %}" style="position: relative; flex: 1 1 0; min-height: 52px; padding: 8px 14px; overflow: hidden; cursor: pointer; color: #323130; text-align: left; background: none; width: 100%; height: 100%; border: none; box-shadow: none;"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+					<span class="task-title" style="margin: 0; font-size: 16px">{{ task.id }}</span>
 					{% if task.deadline %}
 						<div class="deadline-info-box">
 							<span class="deadline-info-container">
@@ -19,7 +19,9 @@
 							</span>
 						</div>
 					{% endif %}
-				</button>
+				</a>
+
+				<!-- Delete task button -->
 				<div>
 					<div style="display: inline-block">
 						<span style="display: block">
@@ -29,6 +31,7 @@
 						</span>
 					</div>
 				</div>
+				<!-- Delete task button -->
 
 				<!-- Modal delete window -->
 				<div class="modal" id="del-modal" tabindex="-1">
@@ -53,93 +56,98 @@
 				</div>
 				<!-- Modal delete window -->
 
-				<div class="offcanvas offcanvas-end" style="height: 100%; display: flex; flex-direction: column; flex: 1; overflow: hidden; box-sizing: border-box; background-color: #faf9f8" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-					<div class="detail-body" style="padding: 0 24px 0 24px; flex: 1; margin-top: 16px">
-						<div class="offcanvas-header" style="background-color: white; border-radius: 4px; justify-content: left">
-							<h5 class="offcanvas-title" id="offcanvasRightLabel" style="flex: 1 1 0;"><span style="font-size: 16px; line-height: 20px; font-weight: 400;">Task Detail</span></h5>
-							<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-						</div>
-							<div class="hover offcanvas-body" style="padding: 0; margin-top: 16px;">
-								<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px; border-bottom: 0">
-									<div style="display: flex; align-items: center; padding: 14px 16px">
-										<div style="position: relative; border-radius: 4px; font-size: 1.6rem; font-weight: 600; flex: 1 1 0">
-											<div style="padding: 0 16px 0 16px; width: 100%; overflow: visible; box-sizing: border-box" draggable="false">
-												<div style="min-height: 15px; display: flex; user-select: text; height: auto; border: none; word-wrap: break-word; word-break: break-word; width: 100%;" title="{{ task.name }}">
-													<span style="font-size: 14px; font-weight: 600; line-height: 20px; width: 100%;">{{ task.name }}</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="hover" style="overflow-y: auto; margin-top: 16px;">
-								<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px 4px 0 0; border-bottom: 0">
-									<div style="display: flex; align-items: center; padding: 14px 16px">
-										<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-											<img src="/static/img/calendar-deadline.svg" alt="Bootstrap" width="20" height="20">
-										</div>
-										<div style="margin-left: 16px; flex: 1 1 0">
-											<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-												<span style="font-size: 14px; font-weight: 400; line-height: 20px; width: 100%;">{{ task.deadline }}</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="hover" style="overflow-y: auto;">
-								<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 0 0 4px 4px; border-bottom: 0">
-									<div style="display: flex; align-items: center; padding: 14px 16px">
-										<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-											<img src="/static/img/exclamation-circle.svg" alt="Bootstrap" width="20" height="20">
-										</div>
-										<div style="margin-left: 16px; flex: 1 1 0">
-											<span style="font-size: 14px; font-weight: 400; line-height: 20px; width: 100%;">{{ task.priority }}</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="hover" style="overflow-y: auto;">
-								<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 0 0 4px 4px; border-bottom: 0">
-									<div style="display: flex; align-items: center; padding: 14px 16px">
-										<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-											<img src="/static/img/people.svg" alt="Bootstrap" width="20" height="20">
-										</div>
-										<div style="margin-left: 16px; flex: 1 1 0">
-											<span style="font-size: 14px; font-weight: 400; line-height: 20px; width: 100%;">{{ task.assignees }}</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="hover">
-								<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px 4px 0 0; border-bottom: 0">
-									<div style="display: flex; align-items: center; padding: 14px 16px">
-										<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
-											<img src="/static/img/tag.svg" alt="Bootstrap" width="20" height="20">
-										</div>
-										<div style="margin-left: 16px; flex: 1 1 0">
-											<span style="font-size: 14px; font-weight: 400; line-height: 20px; width: 100%;">{{ task.task_type }}</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<label for="exampleFormControlTextarea1" style="display:block;">
-								<textarea disabled class="form-control" placeholder="Comment" style="background-color: white; padding: 12px; font-size: 14px; line-height: 20px; margin-top: 32px; border: none" id="exampleFormControlTextarea1" rows="3">{{ task.description }}</textarea>
-							</label>
-							<div style="margin-top: 32px; display: flex">
-								<a style="flex: 1 1 0; display: flex" href="{% url "app:update-task" pk=task.pk %}">
-									<button type="button" style="background: #2564cf; border: #2564cf; border-radius: 10px; box-shadow: none; color: white; padding: 6px 8px; flex: 1 1 0">
-										<span>Update</span>
-									</button>
-								</a>
-							</div>
-					</div>
-					<hr style="margin: 0 24px 0 24px">
-					<div class="detail-footer" style="position: relative; padding: 24px 16px; margin: 0 24px 0 24px;">
-						<div class="detail-footer-info" style="font-size: 13px; line-height: 20px; color: #605e5c; text-align: center;">
-							<span class="creation-date">created on {{ task.created_date }}</span>
-						</div>
-					</div>
-				</div>
+
+				{% include "app/task_detail.html" %}
+				<!-- OffcanvasRight -->
+{#				<div class="offcanvas offcanvas-end" style="height: 100%; display: flex; flex-direction: column; flex: 1; overflow: hidden; box-sizing: border-box; background-color: #faf9f8" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">#}
+{#					<div class="detail-body" style="padding: 0 24px 0 24px; flex: 1; margin-top: 16px">#}
+{#						<div class="offcanvas-header" style="background-color: white; border-radius: 4px; justify-content: left">#}
+{#							<h5 class="offcanvas-title" id="offcanvasRightLabel" style="flex: 1 1 0;"><span style="font-size: 16px; line-height: 20px; font-weight: 400;">Task Detail</span></h5>#}
+{#							<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>#}
+{#						</div>#}
+{#						<div class="offcanvas-body" style="padding: 0; margin-top: 16px;">#}
+{#							<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px; border-bottom: 0">#}
+{#								<div style="display: flex; align-items: center; padding: 14px 16px">#}
+{#									<div style="position: relative; border-radius: 4px; font-size: 1.6rem; font-weight: 600; flex: 1 1 0">#}
+{#										<div style="padding: 0 16px 0 16px; width: 100%; overflow: visible; box-sizing: border-box" draggable="false">#}
+{#											<div style="min-height: 15px; display: flex; user-select: text; height: auto; border: none; word-wrap: break-word; word-break: break-word; width: 100%;">#}
+{#												<span style="font-size: 14px; font-weight: 600; line-height: 20px; width: 100%;">{{ task.id }}</span>#}
+{#											</div>#}
+{#										</div>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div style="overflow-y: auto; margin-top: 16px;">#}
+{#							<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px 4px 0 0; border-bottom: 0">#}
+{#								<div style="display: flex; align-items: center; padding: 14px 16px">#}
+{#									<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">#}
+{#										<img src="/static/img/calendar-deadline.svg" alt="Bootstrap" width="20" height="20">#}
+{#									</div>#}
+{#									<div style="margin-left: 16px; flex: 1 1 0">#}
+{#										<div class="input-group date" id="datetimepicker1" data-target-input="nearest">#}
+{#											<span style="font-size: 14px; font-weight: 400; line-height: 20px; width: 100%;">{{ task.deadline }}</span>#}
+{#										</div>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div style="overflow-y: auto;">#}
+{#							<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 0 0 4px 4px; border-bottom: 0">#}
+{#								<div style="display: flex; align-items: center; padding: 14px 16px">#}
+{#									<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">#}
+{#										<img src="/static/img/exclamation-circle.svg" alt="Bootstrap" width="20" height="20">#}
+{#									</div>#}
+{#									<div style="margin-left: 16px; flex: 1 1 0">#}
+{#										<span style="font-size: 14px; font-weight: 400; line-height: 20px; width: 100%;">{{ task.priority }}</span>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div style="overflow-y: auto;">#}
+{#							<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 0 0 4px 4px; border-bottom: 0">#}
+{#								<div style="display: flex; align-items: center; padding: 14px 16px">#}
+{#									<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">#}
+{#										<img src="/static/img/people.svg" alt="Bootstrap" width="20" height="20">#}
+{#									</div>#}
+{#									<div style="margin-left: 16px; flex: 1 1 0">#}
+{#										<span style="font-size: 14px; font-weight: 400; line-height: 20px; width: 100%;">{{ task.assignees }}</span>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+{#						</div>#}
+{#						<div>#}
+{#							<div style="z-index: 10; position: sticky; top: 0; display: flex; flex-direction: column; background-color: white; border-radius: 4px 4px 0 0; border-bottom: 0">#}
+{#								<div style="display: flex; align-items: center; padding: 14px 16px">#}
+{#									<div style="height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">#}
+{#										<img src="/static/img/tag.svg" alt="Bootstrap" width="20" height="20">#}
+{#									</div>#}
+{#									<div style="margin-left: 16px; flex: 1 1 0">#}
+{#										<span style="font-size: 14px; font-weight: 400; line-height: 20px; width: 100%;">{{ task.task_type }}</span>#}
+{#									</div>#}
+{#								</div>#}
+{#							</div>#}
+{#						</div>#}
+{#						<label for="exampleFormControlTextarea1" style="display:block;">#}
+{#							<textarea disabled class="form-control" placeholder="Comment" style="background-color: white; padding: 12px; font-size: 14px; line-height: 20px; margin-top: 32px; border: none" id="exampleFormControlTextarea1" rows="3">{{ task.description }}</textarea>#}
+{#						</label>#}
+{#						<div style="margin-top: 32px; display: flex">#}
+{#							<a style="flex: 1 1 0; display: flex" href="{% url "app:update-task" pk=task.pk %}">#}
+{#								<button type="button" style="background: #2564cf; border: #2564cf; border-radius: 10px; box-shadow: none; color: white; padding: 6px 8px; flex: 1 1 0">#}
+{#									<span>Update</span>#}
+{#								</button>#}
+{#							</a>#}
+{#						</div>#}
+{#					</div>#}
+{#					<hr style="margin: 0 24px 0 24px">#}
+{#					<div class="detail-footer" style="position: relative; padding: 24px 16px; margin: 0 24px 0 24px;">#}
+{#						<div class="detail-footer-info" style="font-size: 13px; line-height: 20px; color: #605e5c; text-align: center;">#}
+{#							<span class="creation-date">created on {{ task.created_date }}</span>#}
+{#						</div>#}
+{#					</div>#}
+{#				</div>#}
+				<!-- offcanvasRight -->
+
 			</div>
 		</div>
 	</div>
