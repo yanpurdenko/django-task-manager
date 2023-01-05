@@ -214,7 +214,7 @@
 		<div class="dropdown p-4">
 			<a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 				<span class="sidebar-ls-title">{{ user.first_name }} {{ user.last_name }}</span>
-				<img src="/static" alt="" width="32" height="32" class="rounded-circle ms-3">
+				<img src="{{ user.profile.avatar.url }}" alt="" width="32" height="32" class="rounded-circle ms-3">
 			</a>
 			<ul class="dropdown-menu text-small shadow">
 				<li><a class="dropdown-item" href="{% url "users:profile" %}">Profile</a></li>
