@@ -1,6 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordResetView, PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views import generic
 
 from app.models import Worker
 from users.forms import UpdateUserForm, UpdateProfileForm
@@ -34,6 +39,35 @@ def update_profile_view(request):
     return render(request, "users/update_profile.html", {"worker": worker})
 
 
-@login_required
-def workers_profiles_list_view(request):
-    return render(request, "users/workers-profiles.html")
+class WorkersListView(LoginRequiredMixin, generic.ListView):
+    model = Worker
+    template_name = "users/workers_profiles.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(WorkersListView, self).get_context_data(**kwargs)
+
+        context["workers"] = Worker.objects.exclude(id=self.request.user.id).select_related()
+
+        return context
+
+
+class WorkerProfileDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Worker
+    template_name = "users/worker_profile_detail.html"
+
+
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = "users/password_reset.html"
+    email_template_name = "users/password_reset_email.html"
+    subject_template_name = "users/password_reset_subject"
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
+    success_url = reverse_lazy("login")
+
+
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = "users/change_password.html"
+    success_message = "Successfully Changed Your Password"
+    success_url = reverse_lazy("users:profile")

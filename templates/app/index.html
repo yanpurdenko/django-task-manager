@@ -14,12 +14,9 @@
 		{% block task-iterator %}
 			{% for task in tasks %}
 				{% block content %}
-					{% include "includes/task-list.html" %}
+					{% include "includes/task_list.html" %}
 				{% endblock %}
 			{% endfor %}
 		{% endblock %}
 	{% endif %}
 {% endblock %}
-{#{% block pagination %}#}
-{#	{% include "includes/pagination.html" %}#}
-{#{% endblock %}#}

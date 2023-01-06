@@ -3,7 +3,7 @@
 
 
 {% block tasks-toolbar-title %}
-	Critical Tasks
+	Low Tasks
 {% endblock %}
 
 {% block tasks-toolbar-icon %}
@@ -11,15 +11,15 @@
 {% endblock %}
 
 {% block tasks-existence-check %}
-	{% if critical_tasks %}
+	{% if low_tasks %}
 		{% block task-iterator %}
-			{% for task in critical_tasks %}
+			{% for task in low_tasks %}
 				{% block content %}
-					{% include "includes/task-list.html" %}
+					{% include "includes/task_list.html" %}
 				{% endblock %}
 			{% endfor %}
 		{% endblock %}
 	{% else %}
-		<span class="mt-4">You don't have critical tasks yet</span>
+		<span class="mt-4">You don't have low tasks yet</span>
 	{% endif %}
 {% endblock %}
