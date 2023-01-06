@@ -35,7 +35,7 @@ def index(request):
 
 class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
-    template_name = "app/critical-task-list.html"
+    template_name = "app/critical_task_list.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CriticalTaskListView, self).get_context_data(**kwargs)
@@ -52,7 +52,7 @@ class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
 
 class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
-    template_name = "app/important-task-list.html"
+    template_name = "app/important_task_list.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ImportantTaskListView, self).get_context_data(**kwargs)
@@ -69,7 +69,7 @@ class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
 
 class NormalTaskListView(LoginRequiredMixin, ListView):
     model = Task
-    template_name = "app/normal-task-list.html"
+    template_name = "app/normal_task_list.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(NormalTaskListView, self).get_context_data(**kwargs)
@@ -86,7 +86,7 @@ class NormalTaskListView(LoginRequiredMixin, ListView):
 
 class LowTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
-    template_name = "app/low-task-list.html"
+    template_name = "app/low_task_list.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(LowTaskListView, self).get_context_data(**kwargs)
@@ -103,7 +103,7 @@ class LowTaskListView(LoginRequiredMixin, generic.ListView):
 
 class TodayTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
-    template_name = "app/today-task-list.html"
+    template_name = "app/today_task_list.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TodayTaskListView, self).get_context_data(**kwargs)
@@ -120,7 +120,7 @@ class TodayTaskListView(LoginRequiredMixin, generic.ListView):
 
 class MyTaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
-    template_name = "app/my-task-list.html"
+    template_name = "app/my_task_list.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(MyTaskListView, self).get_context_data(**kwargs)
@@ -141,15 +141,6 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = "app/task_form.html"
     success_url = reverse_lazy("app:index")
 
-    def get_context_data(self, **kwargs):
-        context = super(TaskCreateView, self).get_context_data(**kwargs)
-
-        context["priorities"] = [priority[1] for priority in Task.PRIORITY_CHOICES]
-        context["workers"] = Worker.objects.all()
-        context["task_types"] = TaskType.objects.all()
-
-        return context
-
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
@@ -159,9 +150,7 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super(TaskUpdateView, self).get_context_data(**kwargs)
 
-        context["priorities"] = [priority[1] for priority in Task.PRIORITY_CHOICES]
-        context["workers"] = Worker.objects.all()
-        context["task_types"] = TaskType.objects.all().select_related()
+        # context["task"] = Task.objects.get(self.object)
 
         return context
 
@@ -171,16 +160,10 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("app:index")
 
 
-class TaskDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Task
-    template_name = "app/task_detail.html"
-    queryset = Task.objects.all().select_related()
-
-
 class WorkerCreateView(generic.CreateView):
     model = Worker
     form_class = WorkerCreationForm
-    template_name = "registration/sign-up.html"
+    template_name = "registration/sign_up.html"
     success_url = reverse_lazy("app:index")
 
     def get_context_data(self, **kwargs):

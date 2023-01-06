@@ -18,7 +18,6 @@ class CreateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ("name", "description", "deadline", "priority", "task_type", "assignees",)
-        deadline = forms.DateField(widget=forms.DateInput(format="%d/%m/%Y"), input_formats=settings.DATE_INPUT_FORMATS)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -33,7 +32,7 @@ class UpdateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ("name", "description", "deadline", "priority", "task_type", "assignees",)
-        deadline = forms.DateField(widget=forms.DateInput(format="%d/%m/%Y"), input_formats=settings.DATE_INPUT_FORMATS)
+        deadline = forms.DateField(widget=forms.DateInput(format="%d.%m.%Y"), input_formats=settings.DATE_INPUT_FORMATS)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -41,3 +40,4 @@ class UpdateTaskForm(forms.ModelForm):
         self.helper.form_method = "POST"
         self.fields["description"].widget.attrs = {"rows": 3}
         self.fields["deadline"].widget.attrs = {"type": "date"}
+        self.fields["deadline"].widget.attrs = {"value": "{{ task.deadline }}"}
