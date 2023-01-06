@@ -129,8 +129,7 @@ a:hover{
     flex-direction: column;
 }
 
-.deadline-info-box {
-    display: flex;
+.detail-info-box {
     align-items: center;
     font-size: 1.2rem;
     line-height: 1.6rem;
