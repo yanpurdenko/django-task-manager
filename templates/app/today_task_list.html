@@ -3,23 +3,23 @@
 
 
 {% block tasks-toolbar-title %}
-	Important Tasks
+	Today Tasks
 {% endblock %}
 
 {% block tasks-toolbar-icon %}
-	<img class="listTitleIcon" src="/static/img/exclamation-circle.svg" alt="Bootstrap" width="22" height="22">
+	<img class="listTitleIcon" src="/static/img/brightness-high.svg" alt="Bootstrap" width="22" height="22">
 {% endblock %}
 
 {% block tasks-existence-check %}
-	{% if important_tasks %}
+	{% if today_tasks %}
 		{% block task-iterator %}
-			{% for task in important_tasks %}
+			{% for task in today_tasks %}
 				{% block content %}
-					{% include "includes/task-list.html" %}
+					{% include "includes/task_list.html" %}
 				{% endblock %}
 			{% endfor %}
 		{% endblock %}
 	{% else %}
-		<span class="mt-4">You don't have important tasks yet</span>
+		<span class="mt-4">Add new tasks</span>
 	{% endif %}
 {% endblock %}

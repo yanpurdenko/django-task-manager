@@ -41,7 +41,7 @@ def update_profile_view(request):
 
 class WorkersListView(LoginRequiredMixin, generic.ListView):
     model = Worker
-    template_name = "users/workers-profiles.html"
+    template_name = "users/workers_profiles.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(WorkersListView, self).get_context_data(**kwargs)
@@ -53,7 +53,7 @@ class WorkersListView(LoginRequiredMixin, generic.ListView):
 
 class WorkerProfileDetailView(LoginRequiredMixin, generic.DetailView):
     model = Worker
-    template_name = "users/worker-profile-detail.html"
+    template_name = "users/worker_profile_detail.html"
 
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):

@@ -90,11 +90,13 @@
 												</span>
 											</h2>
 										</div>
-										<div class="d-flex justify-content-center align-items-center">
-											<button class="addTaskButton">
-												<a style="text-decoration: none" href="{% url 'app:create-task' %}"><span style="color: white; text-decoration: none">Add Task</span></a>
-											</button>
-										</div>
+										{% block add_task_button %}
+											<div class="d-flex justify-content-center align-items-center">
+												<button class="addTaskButton">
+													<a style="text-decoration: none" href="{% url 'app:create-task' %}"><span style="color: white; text-decoration: none">Add Task</span></a>
+												</button>
+											</div>
+										{% endblock %}
 									</div>
 								</div>
 							</div>
@@ -124,26 +126,5 @@
 				{% endblock %}
 			</div>
 		{% endblock %}
-
-		<!-- Connect LiveReload-->
-		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-		<script>
-			let inputs = document.querySelectorAll('.input__file');
-			Array.prototype.forEach.call(inputs, function (input) {
-				let label = input.nextElementSibling,
-					labelVal = label.querySelector('#input__file-button-text').innerText;
-
-				input.addEventListener('change', function (e) {
-					let countFiles = '';
-					if (this.files && this.files.length >= 1)
-						countFiles = this.files.length;
-
-					if (countFiles)
-						label.querySelector('#input__file-button-text').innerText = 'Choose files: ' + countFiles;
-					else
-						label.querySelector('#input__file-button-text').innerText = labelVal;
-				});
-			});
-	</script>
 	</body>
 </html>
