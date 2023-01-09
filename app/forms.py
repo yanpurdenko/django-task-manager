@@ -1,9 +1,8 @@
-from crispy_forms.helper import FormHelper
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
 from app.models import Worker, Task
-from task_manager import settings
 
 
 class WorkerCreationForm(UserCreationForm):
@@ -18,13 +17,10 @@ class CreateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ("name", "description", "deadline", "priority", "task_type", "assignees",)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = "POST"
-        self.fields["description"].widget.attrs = {"rows": 3}
-        self.fields["deadline"].widget.attrs = {"type": "date"}
+        widgets = {
+            "deadline": DatePickerInput(),
+            "description": forms.widgets.Textarea(attrs={"rows": "3"}),
+        }
 
 
 class UpdateTaskForm(forms.ModelForm):
@@ -32,12 +28,7 @@ class UpdateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ("name", "description", "deadline", "priority", "task_type", "assignees",)
-        deadline = forms.DateField(widget=forms.DateInput(format="%d.%m.%Y"), input_formats=settings.DATE_INPUT_FORMATS)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = "POST"
-        self.fields["description"].widget.attrs = {"rows": 3}
-        self.fields["deadline"].widget.attrs = {"type": "date"}
-        self.fields["deadline"].widget.attrs = {"value": "{{ task.deadline }}"}
+        widgets = {
+            "deadline": DatePickerInput(),
+            "description": forms.widgets.Textarea(attrs={"rows": "3"}),
+        }

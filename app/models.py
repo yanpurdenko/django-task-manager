@@ -50,9 +50,7 @@ class Worker(AbstractUser):
         verbose_name_plural = "workers"
 
     def __str__(self):
-        return (
-            f"{self.first_name} {self.last_name}"
-        )
+        return f"{self.first_name} {self.last_name}"
 
     def get_absolute_url(self):
         return reverse("app:worker-detail", kwargs={"pk": self.pk})
@@ -84,10 +82,7 @@ class Task(models.Model):
     class Meta:
         verbose_name = "task"
         verbose_name_plural = "tasks"
-        ordering = ["name"]
+        ordering = ["created_date"]
 
     def __str__(self):
-        return self.deadline
-
-    def get_absolute_url(self):
-        return reverse("app:delete-task", kwargs={"pk": self.pk})
+        return self.name
