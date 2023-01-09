@@ -34,6 +34,8 @@ def index(request):
 
 
 class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
+    """ListView class only for critical tasks."""
+
     model = Task
     template_name = "app/critical_task_list.html"
 
@@ -51,6 +53,8 @@ class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
 
 
 class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
+    """ListView class only for important tasks."""
+
     model = Task
     template_name = "app/important_task_list.html"
 
@@ -68,6 +72,8 @@ class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
 
 
 class NormalTaskListView(LoginRequiredMixin, ListView):
+    """ListView class only for normal tasks."""
+
     model = Task
     template_name = "app/normal_task_list.html"
 
@@ -85,6 +91,8 @@ class NormalTaskListView(LoginRequiredMixin, ListView):
 
 
 class LowTaskListView(LoginRequiredMixin, generic.ListView):
+    """ListView class only for low tasks."""
+
     model = Task
     template_name = "app/low_task_list.html"
 
@@ -102,6 +110,8 @@ class LowTaskListView(LoginRequiredMixin, generic.ListView):
 
 
 class TodayTaskListView(LoginRequiredMixin, generic.ListView):
+    """ListView class only for tasks which deadline is today."""
+
     model = Task
     template_name = "app/today_task_list.html"
 
@@ -119,6 +129,8 @@ class TodayTaskListView(LoginRequiredMixin, generic.ListView):
 
 
 class MyTaskListView(LoginRequiredMixin, generic.ListView):
+    """ListView class only for tasks where executor is current login user."""
+
     model = Task
     template_name = "app/my_task_list.html"
 
@@ -136,6 +148,8 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
+    """CreateView class for creating tasks."""
+
     model = Task
     form_class = CreateTaskForm
     template_name = "app/task_form.html"
@@ -143,6 +157,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
 
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
+    """UpdateView class for updating tasks."""
     model = Task
     form_class = UpdateTaskForm
     success_url = reverse_lazy("app:index")
@@ -156,11 +171,15 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
+    """DeleteView class for delete tasks."""
+
     model = Task
     success_url = reverse_lazy("app:index")
 
 
 class WorkerCreateView(generic.CreateView):
+    """CreateView class for sign up and create new users."""
+
     model = Worker
     form_class = WorkerCreationForm
     template_name = "registration/sign_up.html"
