@@ -13,6 +13,8 @@ from users.forms import UpdateUserForm, UpdateProfileForm
 
 @login_required()
 def profile_view(request):
+    """View function for users profiles pages."""
+
     worker = Worker.objects.get(id=request.user.id)
     profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
@@ -21,6 +23,8 @@ def profile_view(request):
 
 @login_required
 def update_profile_view(request):
+    """View function for updating users profiles datas with validation."""
+
     worker = Worker.objects.get(id=request.user.id)
 
     if request.method == "POST":
@@ -40,6 +44,8 @@ def update_profile_view(request):
 
 
 class WorkersListView(LoginRequiredMixin, generic.ListView):
+    """ListView class for full list of users profiles."""
+
     model = Worker
     template_name = "users/workers_profiles.html"
 
@@ -52,11 +58,19 @@ class WorkersListView(LoginRequiredMixin, generic.ListView):
 
 
 class WorkerProfileDetailView(LoginRequiredMixin, generic.DetailView):
+    """DetailView class for user profile page."""
+
     model = Worker
     template_name = "users/worker_profile_detail.html"
 
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    """
+    PasswordResetView class for reset user account password.
+    If user email exist in database, he will receive link
+    on this email for password reset.
+    """
+
     template_name = "users/password_reset.html"
     email_template_name = "users/password_reset_email.html"
     subject_template_name = "users/password_reset_subject"
@@ -68,6 +82,12 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
 
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    """
+    PasswordChangeView class for changing password.
+    User will need to input old password and new password.
+    If the password is incorrect, a notification will be raised.
+    """
+
     template_name = "users/change_password.html"
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy("users:profile")
