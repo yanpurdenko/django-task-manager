@@ -92,9 +92,7 @@
 										</div>
 										{% block add_task_button %}
 											<div class="d-flex justify-content-center align-items-center">
-												<button class="addTaskButton">
-													<a style="text-decoration: none" href="{% url 'app:create-task' %}"><span style="color: white; text-decoration: none">Add Task</span></a>
-												</button>
+												<a class="addTaskButton" style="text-decoration: none" href="{% url "app:create-task" %}"><span style="color: white; text-decoration: none">Add Task</span></a>
 											</div>
 										{% endblock %}
 									</div>

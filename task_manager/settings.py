@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "bootstrap5",
     "debug_toolbar",
+    "bootstrap_datepicker_plus",
 ]
 
 MIDDLEWARE = [
@@ -101,14 +102,11 @@ DATABASES = {
         "PASSWORD": "admin",
         "HOST": "127.0.0.1",
         "PORT": "5432",
+        "TEST": {'NAME': 'mytestdatabase'},
     }
 }
 
 USE_L10N = False
-
-DATE_INPUT_FORMATS = [
-    "%d.%m.%Y"
-]
 
 
 # Password validation

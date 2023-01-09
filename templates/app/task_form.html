@@ -25,8 +25,9 @@
 			</div>
 			<div class="overflow-auto mb-5 p-3">
 				<div class="w-50 create-task-container">
+					{{ form.media }}
 					<form method="POST" novalidate> {% csrf_token %}
-						{{ form|crispy }}
+						{{ form | crispy }}
 						<div class="d-inline-block">
 							<input class="create-task-button" type="submit" value="Submit">
 						</div>
