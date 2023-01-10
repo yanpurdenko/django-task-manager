@@ -6,6 +6,7 @@ from app.models import Worker, Task
 
 
 class WorkerCreationForm(UserCreationForm):
+    """CreateForm class for create new users."""
 
     class Meta(UserCreationForm.Meta):
         model = Worker
@@ -13,6 +14,7 @@ class WorkerCreationForm(UserCreationForm):
 
 
 class CreateTaskForm(forms.ModelForm):
+    """CreateForm class for create new tasks."""
 
     class Meta:
         model = Task
@@ -24,6 +26,7 @@ class CreateTaskForm(forms.ModelForm):
 
 
 class UpdateTaskForm(forms.ModelForm):
+    """UpdateForm class for update tasks."""
 
     class Meta:
         model = Task
