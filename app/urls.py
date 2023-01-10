@@ -12,6 +12,7 @@ from .views import (
     TodayTaskListView,
     WorkerCreateView,
     MyTaskListView,
+    complete_task,
 )
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,6 +26,7 @@ urlpatterns = [
     path("tasks/low/", LowTaskListView.as_view(), name="low-task"),
     path("tasks/my/", MyTaskListView.as_view(), name="my-task"),
     path("tasks/create/", TaskCreateView.as_view(), name="create-task"),
+    path("tasks/<int:pk>/complete", complete_task, name="complete-task"),
     path("tasks/<int:pk>/update", TaskUpdateView.as_view(), name="update-task"),
     path("tasks/<int:pk>/delete", TaskDeleteView.as_view(), name="delete-task"),
     path("tasks/create", WorkerCreateView.as_view(), name="create-worker"),
