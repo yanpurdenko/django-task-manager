@@ -4,11 +4,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
 from app.forms import WorkerCreationForm, CreateTaskForm, UpdateTaskForm
 from app.models import Task, Worker, TaskType, Position
+
+
+@login_required
+def complete_task(request, pk):
+    pass
 
 
 @login_required
