@@ -1,0 +1,72 @@
+{% load static %}
+{% for task in tasks %}
+<div class="shadow-sm mb-2 bg-body rounded" style="background-color: white; margin-top: 5px;">
+ <div>
+  <div class="taskItem">
+   <div class="hover" style="border-radius: 4px; padding: 0 16px; min-height: 52px; display: flex; align-items: center; position: relative; word-wrap: break-word; word-break: break-word; flex-wrap: wrap;">
+    <form class="complete-task" method="post" action="{% url "app:complete-task" task.pk %}">{% csrf_token %}
+     <span style="padding: 0; cursor: pointer; height: 32px; width: 32px; position: relative; display: flex; align-items: center; justify-content: center;">
+      <input class="form-check-input" style="margin: 0; height: 1.1em; width: 1.1em" type="checkbox" value=""/>
+     </span>
+    </form>
+    <a role="button" href="{% url "app:update-task" task.pk %}" style="text-decoration: none; position: relative; flex: 1 1 0; min-height: 52px; padding: 8px 14px; overflow: hidden; cursor: pointer; color: #323130; text-align: left; background: none; width: 100%; height: 100%; border: none; box-shadow: none;">
+     <span class="task-title" style="margin: 0; font-size: 16px">{{ task.name }}</span>
+     <div class="d-flex detail-info-box">
+      {% if task.task_type %}
+       <span class="deadline-info-container me-3">
+        <span class="deadline-info">
+         <img class="deadline-info-icon" src="/static/img/tag.svg" alt="Bootstrap" width="12" height="12">
+         <span class="deadline-info-text">Type: {{ task.task_type }}</span>
+        </span>
+       </span>
+      {% else %}
+
+      {% endif %}
+      {% if task.priority %}
+       <span class="deadline-info-container me-3">
+        <span class="deadline-info">
+         <img class="deadline-info-icon" src="/static/img/exclamation-circle.svg" alt="Bootstrap" width="12" height="12">
+         <span class="deadline-info-text">Priority: {{ task.priority }}</span>
+        </span>
+       </span>
+      {% else %}
+
+      {% endif %}
+      {% if task.assignees %}
+       <span class="deadline-info-container me-3">
+        <span class="deadline-info">
+         <img class="deadline-info-icon" src="/static/img/person.svg" alt="Bootstrap" width="12" height="12">
+         <span class="deadline-info-text">Assignees: {{ task.assignees }}</span>
+        </span>
+       </span>
+      {% else %}
+
+      {% endif %}
+      {% if task.deadline %}
+       <span class="deadline-info-container">
+        <span class="deadline-info">
+         <img class="deadline-info-icon" src="/static/img/calendar-deadline.svg" alt="Bootstrap" width="12" height="12">
+         <span class="deadline-info-text">Deadline: {{ task.deadline }}</span>
+        </span>
+       </span>
+      {% endif %}
+     </div>
+    </a>
+
+    <!-- Delete task button -->
+    <div>
+     <div style="display: inline-block">
+      <span style="display: block">
+       <a class="me-3" href="{% url "app:delete-task" task.pk %}">
+        <img src="/static/img/trash3.svg" alt="Bootstrap" width="18" height="18">
+       </a>
+      </span>
+     </div>
+    </div>
+    <!-- Delete task button -->
+
+   </div>
+  </div>
+ </div>
+</div>
+{% endfor %}

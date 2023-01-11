@@ -4,16 +4,48 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import ListView
 
 from app.forms import WorkerCreationForm, CreateTaskForm, UpdateTaskForm
-from app.models import Task, Worker, TaskType, Position
+from app.models import Task, Worker
 
 
 @login_required
 def complete_task(request, pk):
-    pass
+    """Function for the home page of the site."""
+
+    queryset = Task.objects.filter(is_completed=False).select_related()
+    task = Task.objects.get(id=pk)
+    task.is_completed = True
+    task.save()
+
+    if "tasks" in request.headers["Referer"]:
+        queryset = Task.objects.filter(is_completed=False).select_related()
+
+    if "critical" in request.headers["Referer"]:
+        queryset = Task.objects.filter(priority="Critical", assignees=request.user, is_completed=False).select_related()
+
+    if "important" in request.headers["Referer"]:
+        queryset = Task.objects.filter(priority="Important", assignees=request.user, is_completed=False).select_related()
+
+    if "normal" in request.headers["Referer"]:
+        queryset = Task.objects.filter(priority="Normal", assignees=request.user, is_completed=False).select_related()
+
+    if "low" in request.headers["Referer"]:
+        queryset = Task.objects.filter(priority="Low", assignees=request.user, is_completed=False).select_related()
+
+    if "today" in request.headers["Referer"]:
+        queryset = Task.objects.filter(deadline=datetime.date.today(), assignees=request.user, is_completed=False).select_related()
+
+    if "my" in request.headers["Referer"]:
+        queryset = Task.objects.filter(assignees=request.user, is_completed=False).select_related()
+
+    context = {
+        "tasks": queryset
+    }
+
+    return render(request, "complete_task.html", context=context)
 
 
 @login_required
@@ -23,17 +55,12 @@ def index(request):
     num_visits = request.session.get("num_visits", 0)
     request.session["num_visits"] = num_visits + 1
 
-    queryset = Task.objects.all().select_related()
+    queryset = Task.objects.filter(is_completed=False).select_related()
 
     if request.GET.get("name") is not None:
-        queryset = queryset.filter(name__icontains=request.GET.get("name"))
+        queryset = queryset.filter(name__icontains=request.GET.get("name"), is_completed=False)
 
-    context = {
-        "tasks": queryset,
-        "priorities": [priority[1] for priority in Task.PRIORITY_CHOICES],
-        "workers_without_user": Worker.objects.exclude(id=request.user.id).select_related(),
-        "task_types": TaskType.objects.all(),
-    }
+    context = {"tasks": queryset}
 
     return render(request, "app/index.html", context=context)
 
@@ -47,10 +74,10 @@ class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CriticalTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        critical_tasks = Task.objects.filter(priority="Critical", assignees=user).select_related()
+        critical_tasks = Task.objects.filter(priority="Critical", assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            critical_tasks = critical_tasks.filter(name__icontains=self.request.GET.get("name"))
+            critical_tasks = critical_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["critical_tasks"] = critical_tasks
 
@@ -66,10 +93,10 @@ class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ImportantTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        important_tasks = Task.objects.filter(priority="Important", assignees=user).select_related()
+        important_tasks = Task.objects.filter(priority="Important", assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            important_tasks = important_tasks.filter(name__icontains=self.request.GET.get("name"))
+            important_tasks = important_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["important_tasks"] = important_tasks
 
@@ -85,10 +112,10 @@ class NormalTaskListView(LoginRequiredMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(NormalTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        normal_tasks = Task.objects.filter(priority="Normal", assignees=user).select_related()
+        normal_tasks = Task.objects.filter(priority="Normal", assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            normal_tasks = normal_tasks.filter(name__icontains=self.request.GET.get("name"))
+            normal_tasks = normal_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["normal_tasks"] = normal_tasks
 
@@ -104,10 +131,10 @@ class LowTaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(LowTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        low_tasks = Task.objects.filter(priority="Low", assignees=user).select_related()
+        low_tasks = Task.objects.filter(priority="Low", assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            low_tasks = low_tasks.filter(name__icontains=self.request.GET.get("name"))
+            low_tasks = low_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["low_tasks"] = low_tasks
 
@@ -123,10 +150,12 @@ class TodayTaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TodayTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        today_tasks = Task.objects.filter(deadline=datetime.date.today(), assignees=user).select_related()
+        today_tasks = Task.objects.filter(
+            deadline=datetime.date.today(), assignees=user, is_completed=False
+        ).select_related()
 
         if self.request.GET.get("name") is not None:
-            today_tasks = today_tasks.filter(name__icontains=self.request.GET.get("name"))
+            today_tasks = today_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["today_tasks"] = today_tasks
 
@@ -142,10 +171,10 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(MyTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        my_tasks = Task.objects.filter(assignees=user).select_related()
+        my_tasks = Task.objects.filter(assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            my_tasks = my_tasks.filter(name__icontains=self.request.GET.get("name"))
+            my_tasks = my_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["my_tasks"] = my_tasks
 
@@ -167,13 +196,6 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = UpdateTaskForm
     success_url = reverse_lazy("app:index")
 
-    def get_context_data(self, **kwargs):
-        context = super(TaskUpdateView, self).get_context_data(**kwargs)
-
-        # context["task"] = Task.objects.get(self.object)
-
-        return context
-
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     """DeleteView class for delete tasks."""
@@ -189,11 +211,3 @@ class WorkerCreateView(generic.CreateView):
     form_class = WorkerCreationForm
     template_name = "registration/sign_up.html"
     success_url = reverse_lazy("app:index")
-
-    def get_context_data(self, **kwargs):
-        context = super(WorkerCreateView, self).get_context_data(**kwargs)
-        positions = Position.objects.all().select_related()
-
-        context["positions"] = positions
-
-        return context
