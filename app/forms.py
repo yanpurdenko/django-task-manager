@@ -5,13 +5,6 @@ from django.contrib.auth.forms import UserCreationForm
 from app.models import Worker, Task
 
 
-class TaskCompleteForm(forms.ModelForm):
-
-    class Meta:
-        model = Task
-        fields = ("is_completed",)
-
-
 class WorkerCreationForm(UserCreationForm):
     """CreateForm class for create new users."""
 
