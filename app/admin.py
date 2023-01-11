@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from app.models import Task, Worker, Position, TaskType
+from users.models import Profile
 
 
 @admin.register(Task)
@@ -37,5 +38,12 @@ class AdminPosition(admin.ModelAdmin):
 @admin.register(TaskType)
 class AdminTaskType(admin.ModelAdmin):
     """Register class for model TaskType to admin page."""
+
+    pass
+
+
+@admin.register(Profile)
+class AdminProfile(admin.ModelAdmin):
+    """Register class for model Profile to admin page."""
 
     pass
