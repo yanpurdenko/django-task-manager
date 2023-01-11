@@ -16,9 +16,9 @@ def profile_view(request):
     """View function for users profiles pages."""
 
     worker = Worker.objects.get(id=request.user.id)
-    profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+    update_profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
-    return render(request, "users/profile.html", {"worker": worker, "profile_form": profile_form})
+    return render(request, "users/profile.html", {"worker": worker, "update_profile_form": update_profile_form})
 
 
 @login_required
@@ -29,22 +29,25 @@ def update_profile_view(request):
 
     if request.method == "POST":
         user_form = UpdateUserForm(request.POST, instance=request.user)
-        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        update_profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid() and update_profile_form.is_valid():
             user_form.save()
-            profile_form.save()
+            update_profile_form.save()
             messages.success(request, "Your profile is updated successfully")
             return redirect("users:profile")
 
         return render(request, "users/update_profile.html", {
-            "user_form": user_form, "profile_form": profile_form, "worker": worker
+            "user_form": user_form, "update_profile_form": update_profile_form, "worker": worker
         })
     return render(request, "users/update_profile.html", {"worker": worker})
 
 
 class WorkersListView(LoginRequiredMixin, generic.ListView):
-    """ListView class for full list of users profiles."""
+    """
+    ListView class for page with full list of
+    users profiles without current login user.
+    """
 
     model = Worker
     template_name = "users/workers_profiles.html"
