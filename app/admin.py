@@ -12,8 +12,9 @@ class AdminTask(admin.ModelAdmin):
     add a several custom fields to list_display and list_filter
     """
 
-    list_display = ["name", "deadline", "is_completed", "priority"]
+    list_display = ["is_completed", "name", "deadline", "task_type", "priority", "assignees", "created_date"]
     list_filter = ("assignees", "priority", "task_type",)
+    search_fields = ["name"]
 
 
 @admin.register(Worker)
