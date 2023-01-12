@@ -46,7 +46,11 @@
        <span class="deadline-info-container">
         <span class="deadline-info">
          <img class="deadline-info-icon" src="/static/img/calendar-deadline.svg" alt="Bootstrap" width="12" height="12">
-         <span class="deadline-info-text">Deadline: {{ task.deadline }}</span>
+         {% if task.deadline < today_date %}
+					 <span class="text-danger deadline-info-text">Deadline: {{ task.deadline }}</span>
+				 {% else %}
+					 <span class="deadline-info-text">Deadline: {{ task.deadline }}</span>
+				 {% endif %}
         </span>
        </span>
       {% endif %}
