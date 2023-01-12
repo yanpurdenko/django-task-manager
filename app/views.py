@@ -42,10 +42,11 @@ def complete_task(request, pk):
         queryset = Task.objects.filter(assignees=request.user, is_completed=False).select_related()
 
     context = {
-        "tasks": queryset
+        "tasks": queryset,
+        "today_date": datetime.date.today()
     }
 
-    return render(request, "complete_task.html", context=context)
+    return render(request, "app/complete_task.html", context=context)
 
 
 @login_required
@@ -56,11 +57,12 @@ def index(request):
     request.session["num_visits"] = num_visits + 1
 
     queryset = Task.objects.filter(is_completed=False).select_related()
+    today_date = datetime.date.today()
 
     if request.GET.get("name") is not None:
         queryset = queryset.filter(name__icontains=request.GET.get("name"), is_completed=False)
 
-    context = {"tasks": queryset}
+    context = {"tasks": queryset, "today_date": today_date}
 
     return render(request, "app/index.html", context=context)
 
@@ -80,6 +82,7 @@ class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
             critical_tasks = critical_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["critical_tasks"] = critical_tasks
+        context["today_date"] = datetime.date.today()
 
         return context
 
@@ -99,6 +102,7 @@ class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
             important_tasks = important_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["important_tasks"] = important_tasks
+        context["today_date"] = datetime.date.today()
 
         return context
 
@@ -118,6 +122,7 @@ class NormalTaskListView(LoginRequiredMixin, ListView):
             normal_tasks = normal_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["normal_tasks"] = normal_tasks
+        context["today_date"] = datetime.date.today()
 
         return context
 
@@ -137,6 +142,7 @@ class LowTaskListView(LoginRequiredMixin, generic.ListView):
             low_tasks = low_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["low_tasks"] = low_tasks
+        context["today_date"] = datetime.date.today()
 
         return context
 
@@ -177,6 +183,7 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
             my_tasks = my_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
 
         context["my_tasks"] = my_tasks
+        context["today_date"] = datetime.date.today()
 
         return context
 
