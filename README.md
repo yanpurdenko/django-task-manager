@@ -14,7 +14,7 @@ Python3 must be already installed
 
 ```shell
 git clone https://github.com/YanPurdenko/task-manager
-git chekout -b develop
+git checkout -b develop
 python3 -m venv venv
 sourse venv/bin/activate
 pip install -r requirements.txt
@@ -30,7 +30,7 @@ DATABASES = {
 python manage.py migrate
 python3 manage.py shell
 from app.models import Position
-positions = ["Develop", "Project manager", "Designer", "Devops", "QA"]
+positions = ["Developer", "Project manager", "Designer", "Devops", "QA"]
 for position in positions:
   Position.objects.create(name=position)
 python manage.py runserver
