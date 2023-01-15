@@ -1,12 +1,13 @@
 from django.db import models
 from PIL import Image
 from app.models import Worker
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Profile(models.Model):
     worker = models.OneToOneField(Worker, on_delete=models.CASCADE)
     avatar = models.ImageField(default="default.png", upload_to="profile_images")
-    phone = models.CharField(max_length=255)
+    phone = PhoneNumberField(blank=True, null=True, help_text="Mobile phone number")
     main_programming_language = models.CharField(max_length=255)
 
     def __str__(self):
