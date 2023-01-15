@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("tasks/", index, name="index"),
+    path("", index, name="index"),
     path("tasks/critical/", CriticalTaskListView.as_view(), name="critical-task"),
     path("tasks/important/", ImportantTaskListView.as_view(), name="important-task"),
     path("tasks/normal/", NormalTaskListView.as_view(), name="normal-task"),
