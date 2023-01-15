@@ -78,7 +78,10 @@
 								<h6 class="mb-0">Phone</h6>
 							</div>
 							<div class="col-sm-9 text-secondary">
+								{% if worker.profile.phone %}
 								{{ worker.profile.phone }}
+								{% else %}
+								{% endif %}
 							</div>
 						</div>
 					</div>
