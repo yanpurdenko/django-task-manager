@@ -35,7 +35,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str(os.getenv("GOOGLE_SECRET"))
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 # DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "task-manager-93gf.onrender.com"]
 
 INTERNAL_IPS = [
     "127.0.0.1",
