@@ -11,7 +11,7 @@ from app.models import Worker
 from users.forms import UpdateUserForm, UpdateProfileForm
 
 
-@login_required()
+@login_required
 def profile_view(request):
     """View function for users profiles pages."""
 
@@ -22,10 +22,10 @@ def profile_view(request):
 
 
 @login_required
-def update_profile_view(request):
+def update_profile_view(request, pk):
     """View function for updating users profiles datas with validation."""
 
-    worker = Worker.objects.get(id=request.user.id)
+    worker = Worker.objects.get(id=pk)
 
     if request.method == "POST":
         user_form = UpdateUserForm(request.POST, instance=request.user)
@@ -34,7 +34,6 @@ def update_profile_view(request):
         if user_form.is_valid() and update_profile_form.is_valid():
             user_form.save()
             update_profile_form.save()
-            messages.success(request, "Your profile is updated successfully")
             return redirect("users:profile")
 
         return render(request, "users/update_profile.html", {
