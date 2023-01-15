@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		{% block title %}
+			<title>Task Manager</title>
+		{% endblock %}
+
+		<!-- Favicons -->
+		<link type="image/x-icon" href="/static/img/favicon-checkbox.ico" rel="shortcut icon">
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+					integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+						integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+		</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+						integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+		</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+						integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+		</script>
+
+    <!-- Font Awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+					integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"
+						integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous">
+		</script>
+
+    <!-- Tempus Dominus Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css"
+					integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js"
+						integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous">
+		</script>
+
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+				integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+						integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+		</script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+	<!-- Connect CSS-->
+		<link rel="stylesheet" href="{% static "css/styles.css" %}">
+		<link rel="stylesheet" href="{% static "css/tasks.css" %}">
+		<link rel="stylesheet" href="{% static "css/profile.css" %}">
+	</head>
+
+	<body>
+		{% block navbar %}
+			{% include "includes/navbar.html" %}
+		{% endblock %}
+
+		{% block app %}
+			<div id="app">
+				{% block sidebar %}
+					{% include "includes/sidebar.html" %}
+				{% endblock %}
+
+				{% block tasks-toolbar %}
+					<link rel="stylesheet" href="{% static 'css/tasks.css' %}">
+					<span id="centerColumn">
+						<div id="main" role="main">
+							<div class="tasksToolbar">
+								<div class="tasksToolbar-top">
+									<div class="tasksToolbar-headline">
+										<div class="tasksToolbar-titleItem">
+											<h2 class="listTitle">
+
+												{% block tasks-toolbar-icon %}
+
+												{% endblock %}
+
+												<span class="listTitleText">
+
+													{% block tasks-toolbar-title %}
+
+													{% endblock %}
+
+												</span>
+											</h2>
+										</div>
+										{% block add_task_button %}
+											<div class="d-flex justify-content-center align-items-center">
+												<a class="addTaskButton" style="text-decoration: none" href="{% url "app:create-task" %}"><span style="color: white; text-decoration: none">Add Task</span></a>
+											</div>
+										{% endblock %}
+									</div>
+								</div>
+							</div>
+							<div class="flex-container p-3 pt-2 overflow-auto">
+								<div class="list-group">
+
+									{% block tasks-existence-check %}
+										<!-- Redefine "if" -->
+
+											{% block task-iterator %}
+												<!-- Redefine "for" -->
+
+													{% block content %}
+														<!-- Redefine content -->
+
+													{% endblock %}
+
+											{% endblock %}
+
+									{% endblock %}
+
+								</div>
+							</div>
+							<div style="height: 34px;"></div>
+						</div>
+					</span>
+				{% endblock %}
+			</div>
+		{% endblock %}
+		<script src="{% static "js/main.js" %}"></script>
+	</body>
+</html>
