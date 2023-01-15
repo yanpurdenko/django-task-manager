@@ -1,0 +1,74 @@
+{% extends "users/profile.html" %}
+{% load crispy_forms_filters %}
+
+{% block change-avatar %}
+<div class="input__wrapper">
+	<label for="input__file" id="input__file-button-text" class="btn addTaskButton mb-0" style="display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start;">
+		<input name="avatar" type="file" id="input__file" class="input__file" multiple>
+		<span class="input__file-icon-wrapper">
+			<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+				<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+				<path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+			</svg>
+		</span>
+		<span class="input__file-button-text">Change Avatar</span>
+ </label>
+</div>
+{% endblock %}
+
+{% block profile_info %}
+<div class="card mb-3">
+	<div class="card-body">
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<label for="username" class="">Username</label>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<input name="username" id="username" type="text" class="form-control" value="{{ worker.username }}">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<label for="first_name" class="">Name</label>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<input name="first_name" id="first_name" type="text" class="form-control" value="{{ worker.first_name }}">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<label for="last_name" class="">Surname</label>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<input name="last_name" id="last_name" type="text" class="form-control" value="{{ worker.last_name }}">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<label for="main_programming_language" class="">Language</label>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				<input name="main_programming_language" id="main_programming_language" type="text" class="form-control" value="{{ worker.profile.main_programming_language }}">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<div class="col-sm-3">
+				<label for="phone" class="">Phone</label>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{% if worker.profile.phone %}
+				<input name="phone" id="phone" placeholder="+380123456789" type="text" class="form-control" value="{{ worker.profile.phone }}">
+				{% else %}
+				<input name="phone" id="phone" placeholder="+380123456789" type="text" class="form-control" value="">
+				{% endif %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-9 text-secondary">
+				<input type="submit" class="btn addTaskButton" value="Save Changes">
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

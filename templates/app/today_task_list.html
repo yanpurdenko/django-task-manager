@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block tasks-toolbar-title %}
+	Today Tasks
+{% endblock %}
+
+{% block tasks-toolbar-icon %}
+	<img class="listTitleIcon" src="/static/img/brightness-high.svg" alt="Bootstrap" width="22" height="22">
+{% endblock %}
+
+{% block tasks-existence-check %}
+	{% if today_tasks %}
+		{% block task-iterator %}
+			{% for task in today_tasks %}
+				{% block content %}
+					{% include "includes/task_list.html" %}
+				{% endblock %}
+			{% endfor %}
+		{% endblock %}
+	{% else %}
+		<span class="mt-4">Add new tasks</span>
+	{% endif %}
+{% endblock %}

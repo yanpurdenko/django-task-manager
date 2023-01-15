@@ -1,0 +1,36 @@
+main {
+	border: none;
+	box-shadow: none;
+}
+
+.hover-2:hover {
+ background: #dbdbdb;
+}
+
+.sidebar-title {
+	font-size: 20px;
+}
+
+.sidebar-ls-svg {
+	margin-left: 16px;
+}
+
+.sidebar-ls-title {
+    font-size: 16px;
+}
+
+.pt-6 {
+	padding-top: 12px;
+}
+
+.sidebar-ls-toggle-title {
+    font-size: 14px;
+}
+
+.sidebar-ls-height {
+	height: 44px;
+}
+
+.sidebar-ls-button {
+	border: none; border-radius: 0; box-shadow: none; padding: 6px 16px;
+}

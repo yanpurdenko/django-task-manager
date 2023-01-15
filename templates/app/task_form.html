@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block tasks-toolbar %}
+	<link rel="stylesheet" href="{% static 'css/task-form.css' %}">
+	<span id="centerColumn">
+		<div id="main" role="main">
+			<div class="tasksToolbar">
+				<div class="tasksToolbar-top">
+					<div class="tasksToolbar-headline">
+						<div class="tasksToolbar-titleItem">
+							<h2 class="listTitle">
+								{% if object %}
+									<img class="listTitleIcon" src="/static/img/arrow-clockwise.svg" alt="Bootstrap" width="22" height="22">
+									<span class="listTitleText">Update Task</span>
+								{% else %}
+									<img class="listTitleIcon" src="/static/img/plus-lg.svg" alt="Bootstrap" width="22" height="22">
+									<span class="listTitleText">Create Task</span>
+								{% endif %}
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="overflow-auto mb-5 p-3">
+				<div class="w-50 create-task-container">
+					{{ form.media }}
+					<form method="POST" novalidate> {% csrf_token %}
+						{{ form | crispy }}
+						<div class="d-inline-block">
+							<input class="create-task-button" type="submit" value="Submit">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</span>
+{% endblock %}
