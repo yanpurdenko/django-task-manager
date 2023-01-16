@@ -5,7 +5,7 @@ Django project for IT companies for managing worker's tasks
 
 # Check it out
 
-...
+https://task-manager-93gf.onrender.com
 
 
 ## Installation
@@ -13,7 +13,7 @@ Django project for IT companies for managing worker's tasks
 Python3 must be already installed
 
 ```shell
-git clone https://github.com/YanPurdenko/task-manager
+git clone https://github.com/yanpurdenko/task-manager.git
 git checkout -b develop
 python3 -m venv venv
 sourse venv/bin/activate
@@ -34,4 +34,4 @@ python manage.py runserver
 
 ## Demo
 
-![Website Interface](demo.png)
+![Website Interface](demo screenshots/Снимок экрана 2023-01-16 в 01.41.02.png)
