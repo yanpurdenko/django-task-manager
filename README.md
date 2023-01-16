@@ -34,4 +34,4 @@ python manage.py runserver
 
 ## Demo
 
-![Website Interface](demo screenshots/Снимок экрана 2023-01-16 в 01.41.02.png)
+![Website Interface](demo.png)
