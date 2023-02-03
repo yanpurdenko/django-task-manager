@@ -10,6 +10,7 @@ django-phonenumber-field==7.0.2
 django_debug_toolbar==3.8.1
 exceptiongroup==1.0.4
 generic==1.1.1
+gunicorn==20.1.0
 phonenumbers==8.13.4
 Pillow==9.3.0
 psycopg2==2.9.5
@@ -20,3 +21,4 @@ soupsieve==2.3.2.post1
 sqlparse==0.4.3
 tornado==6.2
 typing_extensions==4.4.0
+whitenoise==6.3.0
