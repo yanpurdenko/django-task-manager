@@ -30,7 +30,7 @@ python manage.py runserver
 
 
 ## Features
-- Authorization functionality for Workers/Users
+- Authorisation functionality for Workers/Users
 - Change and reset password functionality
 - Workers profile interface
 - Updating profile functionality like changing avatar or edit some profile information
