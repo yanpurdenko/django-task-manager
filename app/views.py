@@ -60,7 +60,7 @@ def index(request):
     today_date = datetime.date.today()
 
     if request.GET.get("name") is not None:
-        queryset = queryset.filter(name__icontains=request.GET.get("name"), is_completed=False)
+        queryset = queryset.filter(name__icontains=request.GET["name"], is_completed=False)
 
     context = {"tasks": queryset, "today_date": today_date}
 
@@ -79,7 +79,7 @@ class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
         critical_tasks = Task.objects.filter(priority="Critical", assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            critical_tasks = critical_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
+            critical_tasks = critical_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
 
         context["critical_tasks"] = critical_tasks
         context["today_date"] = datetime.date.today()
@@ -99,7 +99,7 @@ class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
         important_tasks = Task.objects.filter(priority="Important", assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            important_tasks = important_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
+            important_tasks = important_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
 
         context["important_tasks"] = important_tasks
         context["today_date"] = datetime.date.today()
@@ -119,7 +119,7 @@ class NormalTaskListView(LoginRequiredMixin, ListView):
         normal_tasks = Task.objects.filter(priority="Normal", assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            normal_tasks = normal_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
+            normal_tasks = normal_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
 
         context["normal_tasks"] = normal_tasks
         context["today_date"] = datetime.date.today()
@@ -139,7 +139,7 @@ class LowTaskListView(LoginRequiredMixin, generic.ListView):
         low_tasks = Task.objects.filter(priority="Low", assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            low_tasks = low_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
+            low_tasks = low_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
 
         context["low_tasks"] = low_tasks
         context["today_date"] = datetime.date.today()
@@ -161,7 +161,7 @@ class TodayTaskListView(LoginRequiredMixin, generic.ListView):
         ).select_related()
 
         if self.request.GET.get("name") is not None:
-            today_tasks = today_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
+            today_tasks = today_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
 
         context["today_tasks"] = today_tasks
 
@@ -180,7 +180,7 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
         my_tasks = Task.objects.filter(assignees=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
-            my_tasks = my_tasks.filter(name__icontains=self.request.GET.get("name"), is_completed=False)
+            my_tasks = my_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
 
         context["my_tasks"] = my_tasks
         context["today_date"] = datetime.date.today()
