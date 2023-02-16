@@ -76,7 +76,7 @@ class Task(models.Model):
     task_type = models.ForeignKey(
         TaskType, on_delete=models.CASCADE, related_name="task_types", blank=False, null=False
     )
-    assignees = models.ForeignKey(Worker, on_delete=models.CASCADE, related_name="assignees")
+    assignee = models.ForeignKey(Worker, on_delete=models.CASCADE, related_name="tasks")
     created_date = models.DateField(auto_now_add=True, blank=False, null=False)
 
     class Meta:

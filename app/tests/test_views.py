@@ -84,7 +84,7 @@ class PrivateTasksListViewTests(TestCase):
         response = self.client.get(CRITICAL_TASK_VIEW_URL)
 
         critical_tasks = Task.objects.filter(
-            priority="Critical", assignees=self.user, is_completed=False
+            priority="Critical", assignee=self.user, is_completed=False
         ).select_related()
 
         self.assertEqual(response.status_code, 200)
@@ -95,7 +95,7 @@ class PrivateTasksListViewTests(TestCase):
         response = self.client.get(IMPORTANT_TASK_VIEW_URL)
 
         important_tasks = Task.objects.filter(
-            priority="Important", assignees=self.user, is_completed=False
+            priority="Important", assignee=self.user, is_completed=False
         ).select_related()
 
         self.assertEqual(response.status_code, 200)
@@ -105,7 +105,7 @@ class PrivateTasksListViewTests(TestCase):
     def test_retrieve_normal_task_page(self):
         response = self.client.get(NORMAL_TASK_VIEW_URL)
 
-        normal_tasks = Task.objects.filter(priority="Normal", assignees=self.user, is_completed=False).select_related()
+        normal_tasks = Task.objects.filter(priority="Normal", assignee=self.user, is_completed=False).select_related()
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context["normal_tasks"]), list(normal_tasks))
@@ -114,7 +114,7 @@ class PrivateTasksListViewTests(TestCase):
     def test_retrieve_low_task_page(self):
         response = self.client.get(LOW_TASK_VIEW_URL)
 
-        low_tasks = Task.objects.filter(priority="Low", assignees=self.user, is_completed=False).select_related()
+        low_tasks = Task.objects.filter(priority="Low", assignee=self.user, is_completed=False).select_related()
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context["low_tasks"]), list(low_tasks))
@@ -124,7 +124,7 @@ class PrivateTasksListViewTests(TestCase):
         response = self.client.get(TODAY_TASK_VIEW_URL)
 
         today_tasks = Task.objects.filter(
-            deadline=datetime.date.today(), assignees=self.user, is_completed=False
+            deadline=datetime.date.today(), assignee=self.user, is_completed=False
         ).select_related()
 
         self.assertEqual(response.status_code, 200)
@@ -134,7 +134,7 @@ class PrivateTasksListViewTests(TestCase):
     def test_retrieve_my_task_page(self):
         response = self.client.get(MY_TASK_VIEW_URL)
 
-        my_tasks = Task.objects.filter(assignees=self.user, is_completed=False).select_related()
+        my_tasks = Task.objects.filter(assignee=self.user, is_completed=False).select_related()
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context["my_tasks"]), list(my_tasks))

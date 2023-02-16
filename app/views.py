@@ -24,22 +24,22 @@ def complete_task(request, pk):
         queryset = Task.objects.filter(is_completed=False).select_related()
 
     if "critical" in request.headers["Referer"]:
-        queryset = Task.objects.filter(priority="Critical", assignees=request.user, is_completed=False).select_related()
+        queryset = Task.objects.filter(priority="Critical", assignee=request.user, is_completed=False).select_related()
 
     if "important" in request.headers["Referer"]:
-        queryset = Task.objects.filter(priority="Important", assignees=request.user, is_completed=False).select_related()
+        queryset = Task.objects.filter(priority="Important", assignee=request.user, is_completed=False).select_related()
 
     if "normal" in request.headers["Referer"]:
-        queryset = Task.objects.filter(priority="Normal", assignees=request.user, is_completed=False).select_related()
+        queryset = Task.objects.filter(priority="Normal", assignee=request.user, is_completed=False).select_related()
 
     if "low" in request.headers["Referer"]:
-        queryset = Task.objects.filter(priority="Low", assignees=request.user, is_completed=False).select_related()
+        queryset = Task.objects.filter(priority="Low", assignee=request.user, is_completed=False).select_related()
 
     if "today" in request.headers["Referer"]:
-        queryset = Task.objects.filter(deadline=datetime.date.today(), assignees=request.user, is_completed=False).select_related()
+        queryset = Task.objects.filter(deadline=datetime.date.today(), assignee=request.user, is_completed=False).select_related()
 
     if "my" in request.headers["Referer"]:
-        queryset = Task.objects.filter(assignees=request.user, is_completed=False).select_related()
+        queryset = Task.objects.filter(assignee=request.user, is_completed=False).select_related()
 
     context = {
         "tasks": queryset,
@@ -76,7 +76,7 @@ class CriticalTaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CriticalTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        critical_tasks = Task.objects.filter(priority="Critical", assignees=user, is_completed=False).select_related()
+        critical_tasks = Task.objects.filter(priority="Critical", assignee=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
             critical_tasks = critical_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
@@ -96,7 +96,7 @@ class ImportantTaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ImportantTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        important_tasks = Task.objects.filter(priority="Important", assignees=user, is_completed=False).select_related()
+        important_tasks = Task.objects.filter(priority="Important", assignee=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
             important_tasks = important_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
@@ -116,7 +116,7 @@ class NormalTaskListView(LoginRequiredMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(NormalTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        normal_tasks = Task.objects.filter(priority="Normal", assignees=user, is_completed=False).select_related()
+        normal_tasks = Task.objects.filter(priority="Normal", assignee=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
             normal_tasks = normal_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
@@ -136,7 +136,7 @@ class LowTaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(LowTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        low_tasks = Task.objects.filter(priority="Low", assignees=user, is_completed=False).select_related()
+        low_tasks = Task.objects.filter(priority="Low", assignee=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
             low_tasks = low_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
@@ -157,7 +157,7 @@ class TodayTaskListView(LoginRequiredMixin, generic.ListView):
         context = super(TodayTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
         today_tasks = Task.objects.filter(
-            deadline=datetime.date.today(), assignees=user, is_completed=False
+            deadline=datetime.date.today(), assignee=user, is_completed=False
         ).select_related()
 
         if self.request.GET.get("name") is not None:
@@ -177,7 +177,7 @@ class MyTaskListView(LoginRequiredMixin, generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(MyTaskListView, self).get_context_data(**kwargs)
         user = self.request.user
-        my_tasks = Task.objects.filter(assignees=user, is_completed=False).select_related()
+        my_tasks = Task.objects.filter(assignee=user, is_completed=False).select_related()
 
         if self.request.GET.get("name") is not None:
             my_tasks = my_tasks.filter(name__icontains=self.request.GET["name"], is_completed=False)
