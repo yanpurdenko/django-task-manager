@@ -42,7 +42,7 @@ class TaskType(models.Model):
 
 class Worker(AbstractUser):
     position = models.ForeignKey(
-        Position, on_delete=models.CASCADE, related_name="workers", null=True, blank=True
+        Position, on_delete=models.CASCADE, related_name="workers", null=False, blank=False
     )
 
     class Meta:
@@ -74,9 +74,9 @@ class Task(models.Model):
         max_length=9, choices=PRIORITY_CHOICES, blank=False, null=False
     )
     task_type = models.ForeignKey(
-        TaskType, on_delete=models.SET_NULL, related_name="task_types", blank=True, null=True
+        TaskType, on_delete=models.CASCADE, related_name="task_types", blank=False, null=False
     )
-    assignees = models.ForeignKey(Worker, on_delete=models.CASCADE, related_name="assignees")
+    assignee = models.ForeignKey(Worker, on_delete=models.CASCADE, related_name="tasks")
     created_date = models.DateField(auto_now_add=True, blank=False, null=False)
 
     class Meta:

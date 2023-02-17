@@ -32,11 +32,11 @@
 						{% else %}
 
 						{% endif %}
-						{% if task.assignees %}
+						{% if task.assignee %}
 							<span class="deadline-info-container me-3">
 								<span class="deadline-info">
 									<img class="deadline-info-icon" src="/static/img/person.svg" alt="Bootstrap" width="12" height="12">
-									<span class="deadline-info-text">Assignees: {{ task.assignees }}</span>
+									<span class="deadline-info-text">Assignee: {{ task.assignee }}</span>
 								</span>
 							</span>
 						{% else %}

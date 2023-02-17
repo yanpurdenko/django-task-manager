@@ -7,6 +7,11 @@ Django project for IT companies for managing worker's tasks
 
 https://task-manager-93gf.onrender.com
 
+Also you can check it out with test user
+```shell
+username - test.user
+password - 123456789Pass
+```
 
 ## Installation
 
@@ -19,12 +24,13 @@ python3 -m venv venv
 sourse venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
+create .env file like as in .env.example 
 python manage.py runserver
 ```
 
 
 ## Features
-- Authorization functionality for Workers/Users
+- Authorisation functionality for Workers/Users
 - Change and reset password functionality
 - Workers profile interface
 - Updating profile functionality like changing avatar or edit some profile information
