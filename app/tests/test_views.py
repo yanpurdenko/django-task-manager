@@ -7,7 +7,7 @@ from django.urls import reverse
 from app.models import Position, Task
 
 INDEX_VIEW_URL = reverse("app:index")
-CRITICAL_TASK_VIEW_URL = reverse("app:critical-task")
+CRITICAL_TASK_VIEW_URL = reverse("app:priority-tasks")
 IMPORTANT_TASK_VIEW_URL = reverse("app:important-task")
 NORMAL_TASK_VIEW_URL = reverse("app:normal-task")
 LOW_TASK_VIEW_URL = reverse("app:low-task")
@@ -89,7 +89,7 @@ class PrivateTasksListViewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context["critical_tasks"]), list(critical_tasks))
-        self.assertTemplateUsed(response, "app/critical_task_list.html")
+        self.assertTemplateUsed(response, "app/priority_tasks_list.html")
 
     def test_retrieve_important_task_page(self):
         response = self.client.get(IMPORTANT_TASK_VIEW_URL)

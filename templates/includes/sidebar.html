@@ -127,7 +127,7 @@
 					<div class="collapse" id="dashboard-collapse">
 						<ul class="btn-toggle-nav list-unstyled fw-normal small">
 							<div class="hover-2">
-								<a href="{% url "app:critical-task" %}" class="link-dark d-block text-decoration-none rounded">
+								<a href="{% url "app:priority-tasks" %}?priority=critical" class="link-dark d-block text-decoration-none rounded">
 									<li>
 										<div class="d-flex ps-4 sidebar-ls-height">
 											<div class="d-flex">
@@ -143,7 +143,7 @@
 								</a>
 							</div>
 							<div class="hover-2">
-								<a href="{% url "app:important-task" %}" class="link-dark d-block text-decoration-none rounded">
+								<a href="{% url "app:priority-tasks" %}?priority=important" class="link-dark d-block text-decoration-none rounded">
 									<li>
 										<div class="d-flex ps-4 sidebar-ls-height">
 											<div class="d-flex">
@@ -159,7 +159,7 @@
 								</a>
 							</div>
 							<div class="hover-2">
-								<a href="{% url "app:normal-task" %}" class="link-dark d-block text-decoration-none rounded">
+								<a href="{% url "app:priority-tasks" %}?priority=normal" class="link-dark d-block text-decoration-none rounded">
 									<li>
 										<div class="d-flex ps-4 sidebar-ls-height">
 											<div class="d-flex">
@@ -175,7 +175,7 @@
 								</a>
 							</div>
 							<div class="hover-2">
-								<a href="{% url "app:low-task" %}" class="link-dark d-block text-decoration-none rounded">
+								<a href="{% url "app:priority-tasks" %}?priority=low" class="link-dark d-block text-decoration-none rounded">
 									<li>
 										<div class="d-flex ps-4 sidebar-ls-height">
 											<div class="d-flex">
