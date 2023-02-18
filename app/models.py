@@ -42,7 +42,7 @@ class TaskType(models.Model):
 
 class Worker(AbstractUser):
     position = models.ForeignKey(
-        Position, on_delete=models.CASCADE, related_name="workers", null=False, blank=False
+        Position, on_delete=models.CASCADE, related_name="workers", null=True, blank=True
     )
 
     class Meta:
