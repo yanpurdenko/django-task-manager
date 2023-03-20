@@ -64,6 +64,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -182,7 +183,7 @@ EMAIL_HOST_PASSWORD = str(os.getenv("EMAIL_PASSWORD"))
 
 
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": "dj2perzc4",
-    "API_KEY": "612317128175574",
-    "API_SECRET": "jybwf8d6zAcTIS4ULOV6Mbib3zQ",
+    "CLOUD_NAME": os.getenv("CLOUD_NAME"),
+    "API_KEY": os.getenv("API_KEY"),
+    "API_SECRET": os.getenv("API_SECRET"),
 }
