@@ -214,7 +214,7 @@
 		<div class="dropdown p-4">
 			<a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" style="outline: none" data-bs-toggle="dropdown" aria-expanded="false">
 				<span class="sidebar-ls-title">{{ user.first_name }} {{ user.last_name }}</span>
-				{% if user.profile.avatar.url == "https://res.cloudinary.com/dj2perzc4/raw/upload/v1/media/https://res.cloudinary.com/dj2perzc4/image/upload/v1679338671/media/default.png" %}
+				{% if user.profile.avatar.url == "https://res.cloudinary.com/dj2perzc4/image/upload/v1679338671/media/default.png" %}
 					<img src="{{ user.profile.avatar }}" alt="" width="32" height="32" class="rounded-circle ms-3">
 				{% else %}
 					<img src="{{ user.profile.avatar.url }}" alt="" width="32" height="32" class="rounded-circle ms-3">
