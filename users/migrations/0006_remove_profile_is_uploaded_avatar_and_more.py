@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             model_name="profile",
             name="avatar",
             field=models.ImageField(
-                default="https://res.cloudinary.com/***REMOVED***/image/upload/v1679338671/media/default.png",
+                default="https://res.cloudinary.com/dj2perzc4/image/upload/v1679338671/media/default.png",
                 upload_to=users.models.avatar_image_file_path,
             ),
         ),
