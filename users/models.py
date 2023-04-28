@@ -21,7 +21,7 @@ def avatar_image_file_path(instance: Profile, filename: str) -> str:
 class Profile(models.Model):
     worker = models.OneToOneField(Worker, on_delete=models.CASCADE)
     avatar = models.ImageField(
-        default="https://res.cloudinary.com/***REMOVED***/image/upload/v1679338671/media/default.png",
+        default="media/default.png",
         upload_to=avatar_image_file_path
     )
     phone = PhoneNumberField(blank=True, null=True, help_text="Mobile phone number")
