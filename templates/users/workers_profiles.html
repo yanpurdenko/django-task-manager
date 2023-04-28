@@ -18,7 +18,7 @@
 		<div class="card p-4 me-5" style="height: 290px; width: 290px">
 			<div class="user text-center" style="height: 80px">
 				<div class="profile">
-					{% if worker.profile.avatar.url == "https://res.cloudinary.com/***REMOVED***/raw/upload/v1/media/https://res.cloudinary.com/***REMOVED***/image/upload/v1679338671/media/default.png" %}
+					{% if worker.profile.avatar.url == "https://res.cloudinary.com/***REMOVED***/image/upload/v1679338671/media/default.png" %}
 						<img src="{{ worker.profile.avatar }}" class="rounded-circle" width="80">
 					{% else %}
 						<img src="{{ worker.profile.avatar.url }}" class="rounded-circle" width="80">
