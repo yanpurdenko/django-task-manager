@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block tasks-toolbar-title %}
+	{% if priority == "Critical" %}
+		Critical Tasks
+	{% endif %}
+	{% if priority == "Important" %}
+		Important Tasks
+	{% endif %}
+	{% if priority == "Normal" %}
+		Normal Tasks
+	{% endif %}
+	{% if priority == "Low" %}
+		Low Tasks
+	{% endif %}
+{% endblock %}
+
+{% block tasks-toolbar-icon %}
+	<img class="listTitleIcon" src="/static/img/exclamation-circle.svg" alt="Bootstrap" width="22" height="22">
+{% endblock %}
+
+{% block tasks-existence-check %}
+	{% if queryset %}
+		{% block task-iterator %}
+			{% for task in queryset %}
+				{% block content %}
+					{% include "includes/task_list.html" %}
+				{% endblock %}
+			{% endfor %}
+		{% endblock %}
+	{% else %}
+		<span class="mt-4">You don't have tasks with this priority yet</span>
+	{% endif %}
+{% endblock %}

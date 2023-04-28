@@ -1,0 +1,73 @@
+<div class="card mb-3">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Username</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{{ worker.username }}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{% if worker.first_name %}
+				{{ worker.first_name }}
+				{% else %}
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Last name</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{% if worker.last_name %}
+				{{ worker.last_name }}
+				{% else %}
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Main Language</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{% if worker.profile.main_programming_language %}
+				{{ worker.profile.main_programming_language }}
+				{% else %}
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-sm-3">
+				<h6 class="mb-0">Phone</h6>
+			</div>
+			<div class="col-sm-9 text-secondary">
+				{% if worker.profile.phone %}
+				{{ worker.profile.phone }}
+				{% else %}
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<div class="d-flex" style="justify-content: space-between">
+			<div class="row">
+				<div class="col-sm-12">
+					<a class="btn addTaskButton" methods="post" href="{% url "users:update-profile" pk=worker.pk %}" ><span>Edit profile</span></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm">
+					<a class="btn addTaskButton" methods="post" href="{% url "users:password-change" %}" ><span>Change password</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
