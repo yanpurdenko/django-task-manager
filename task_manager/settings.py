@@ -57,7 +57,9 @@ INSTALLED_APPS = [
     "bootstrap5",
     "debug_toolbar",
     "bootstrap_datepicker_plus",
-    "phonenumber_field"
+    "phonenumber_field",
+    "cloudinary_storage",
+    "cloudinary",
 ]
 
 MIDDLEWARE = [
@@ -155,6 +157,11 @@ STATICFILES_DIRS = (BASE_DIR / "static",)
 
 STATIC_ROOT = "staticfiles/"
 
+
+# Media settings
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.RawMediaCloudinaryStorage"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MEDIA_URL = "/media/"
@@ -173,3 +180,10 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = str(os.getenv("EMAIL_USER"))
 EMAIL_HOST_PASSWORD = str(os.getenv("EMAIL_PASSWORD"))
+
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUD_NAME"),
+    "API_KEY": os.getenv("API_KEY"),
+    "API_SECRET": os.getenv("API_SECRET"),
+}

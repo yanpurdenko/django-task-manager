@@ -17,7 +17,11 @@
 					<div class="card">
 						<div class="card-body d-flex justify-content-center">
 							<div class="d-flex flex-column align-items-center justify-content-center text-center">
+							{% if worker.profile.avatar == "media/default.png" %}
+								<img src="/media/default.png" alt="Admin" class="rounded-circle mb-3" width="150">
+							{% else %}
 								<img src="{{ worker.profile.avatar.url }}" alt="Admin" class="rounded-circle mb-3" width="150">
+							{% endif %}
 								{% block change-avatar %}
 								{% endblock %}
 								<div class="mt-3">

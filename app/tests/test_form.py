@@ -46,7 +46,7 @@ class FormsTests(TestCase):
             "deadline": datetime.date.today(),
             "priority": "Critical",
             "task_type": self.task_type,
-            "assignees": self.worker
+            "assignee": self.worker
         }
         task_form = CreateTaskForm(data=form_data)
 
@@ -62,7 +62,7 @@ class FormsTests(TestCase):
             "deadline": datetime.date.today(),
             "priority": "Critical",
             "task_type": self.task_type,
-            "assignees": self.worker
+            "assignee": self.worker
         }
         task_form = UpdateTaskForm(data=form_data)
 

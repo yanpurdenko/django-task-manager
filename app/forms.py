@@ -18,7 +18,7 @@ class CreateTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ("name", "description", "deadline", "priority", "task_type", "assignees",)
+        fields = ("name", "description", "deadline", "priority", "task_type", "assignee",)
         widgets = {
             "deadline": DatePickerInput(),
             "description": forms.widgets.Textarea(attrs={"rows": "3"}),
@@ -30,7 +30,7 @@ class UpdateTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ("name", "description", "deadline", "priority", "task_type", "assignees",)
+        fields = ("name", "description", "deadline", "priority", "task_type", "assignee",)
         widgets = {
             "deadline": DatePickerInput(),
             "description": forms.widgets.Textarea(attrs={"rows": "3"}),

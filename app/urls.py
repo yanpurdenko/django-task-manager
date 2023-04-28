@@ -3,10 +3,7 @@ from django.urls import path
 from .views import (
     index,
     TaskCreateView,
-    CriticalTaskListView,
-    ImportantTaskListView,
-    NormalTaskListView,
-    LowTaskListView,
+    PriorityTaskListView,
     TaskUpdateView,
     TaskDeleteView,
     TodayTaskListView,
@@ -19,11 +16,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", index, name="index"),
-    path("tasks/critical/", CriticalTaskListView.as_view(), name="critical-task"),
-    path("tasks/important/", ImportantTaskListView.as_view(), name="important-task"),
-    path("tasks/normal/", NormalTaskListView.as_view(), name="normal-task"),
+    path("tasks/priority/", PriorityTaskListView.as_view(), name="priority-tasks"),
     path("tasks/today/", TodayTaskListView.as_view(), name="today-task"),
-    path("tasks/low/", LowTaskListView.as_view(), name="low-task"),
     path("tasks/my/", MyTaskListView.as_view(), name="my-task"),
     path("tasks/create/", TaskCreateView.as_view(), name="create-task"),
     path("tasks/<int:pk>/complete", complete_task, name="complete-task"),

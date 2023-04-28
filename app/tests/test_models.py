@@ -40,7 +40,7 @@ class ModelsTests(TestCase):
             deadline="2023-01-23",
             priority="test",
             task_type=task_type,
-            assignees=worker
+            assignee=worker
         )
 
         self.assertEqual(str(task), task.name)
